@@ -94,9 +94,9 @@
         .result-card { text-align: center; padding: 15px 0; }
         .score-circle { width: 110px; height: 110px; background: #ecfdf5; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid #10b981; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2); }
 
-        /* RUANG IKLAN */
-        .ad-container { text-align: center; margin-bottom: 20px; padding: 12px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; }
-        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        /* RUANG IKLAN ADSTERRA */
+        .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; overflow: hidden; }
+        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
         /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
         .draggable-donate { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 22px; border-radius: 35px; font-size: 14.5px; font-weight: 800; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 10px; cursor: grab; z-index: 9999; border: 2px solid #fff; user-select: none; touch-action: none; }
@@ -137,9 +137,19 @@
             <p class="section-desc">Silakan pilih kelas ujian semester untuk mengakses daftar mata pelajaran:</p>
             <div class="category-grid" id="packetGridContainer"></div>
             
+            <!-- SLOT IKLAN ADSTERRA BANNER -->
             <div class="ad-container" style="margin-top: 25px;">
-                <p>- Ruang Iklan / Sponsor -</p>
-                <div style="font-size: 12px; color: var(--text-muted); padding: 5px;">[ Slot Banner Iklan ]</div>
+                <p>- Sponsor / Informasi Iklan -</p>
+                <script>
+                  atOptions = {
+                    'key' : 'fd65e508ca34468b894a035d5c5f3553',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://www.highrevenueformat.com/fd65e508ca34468b894a035d5c5f3553/invoke.js"></script>
             </div>
         </div>
 
@@ -171,7 +181,7 @@
                 <h2 class="section-heading">Ujian Semester Selesai!</h2>
                 <p class="section-desc" id="resultDesc">Nilai kamu telah terekam dalam sistem.</p>
                 <button class="btn" onclick="switchSection('section-packets')" style="margin-bottom: 12px;"><i class="fa-solid fa-rotate-right"></i> Pilih Mata Pelajaran Lain</button>
-                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i > Kembali ke Menu Utama</button>
+                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i> Kembali ke Menu Utama</button>
             </div>
         </div>
     </div>
