@@ -93,8 +93,8 @@
         .result-card { text-align: center; padding: 15px 0; }
         .score-circle { width: 115px; height: 115px; background: #eff6ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid var(--primary); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2); }
 
-        /* RUANG IKLAN */
-        .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 16px; }
+        /* RUANG IKLAN ADSTERRA */
+        .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 16px; overflow: hidden; }
         .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
         /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
@@ -137,9 +137,19 @@
             
             <div id="tkaPacketContainer"></div>
             
+            <!-- SLOT IKLAN ADSTERRA BANNER -->
             <div class="ad-container" style="margin-top: 25px;">
-                <p>- Ruang Iklan / Sponsor -</p>
-                <div style="font-size: 12px; color: var(--text-muted); padding: 5px;">[ Slot Banner Iklan TKA ]</div>
+                <p>- Sponsor / Informasi Iklan -</p>
+                <script>
+                  atOptions = {
+                    'key' : 'fd65e508ca34468b894a035d5c5f3553',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://www.highrevenueformat.com/fd65e508ca34468b894a035d5c5f3553/invoke.js"></script>
             </div>
         </div>
 
@@ -263,8 +273,8 @@
                         boxWajib.style.cssText = "background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 20px; padding: 22px; margin-bottom: 22px;";
                         boxWajib.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: #166534; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
                                                 <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> Mata Pelajaran Wajib (${packetName})
-                                              </h3>
-                                              <p style="font-size: 13.5px; color: #15803d; margin-bottom: 16px;">Wajib dikerjakan oleh seluruh peserta:</p>`;
+                                             </h3>
+                                             <p style="font-size: 13.5px; color: #15803d; margin-bottom: 16px;">Wajib dikerjakan oleh seluruh peserta:</p>`;
                         
                         const gridWajib = document.createElement('div');
                         gridWajib.className = 'category-grid';
@@ -289,8 +299,8 @@
                         boxPilihan.style.cssText = "background: #fffbeb; border: 2px solid #fde68a; border-radius: 20px; padding: 22px;";
                         boxPilihan.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
                                                 <i class="fa-solid fa-layer-group" style="color: #f59e0b;"></i> Mata Pelajaran Pilihan (${packetName})
-                                              </h3>
-                                              <p style="font-size: 13.5px; color: #b45309; margin-bottom: 16px;">Pilih sesuai bidang peminatan (Pilih 2 mapel):</p>`;
+                                             </h3>
+                                             <p style="font-size: 13.5px; color: #b45309; margin-bottom: 16px;">Pilih sesuai bidang peminatan (Pilih 2 mapel):</p>`;
                         
                         const gridPilihan = document.createElement('div');
                         gridPilihan.className = 'category-grid';
@@ -370,15 +380,15 @@
 
             if (q.stimulus) {
                 htmlContent += `<div class="stimulus-box">
-                                 <strong><i class="fa-solid fa-book-open-reader"></i> Bacaan / Stimulus:</strong>
-                                 <p style="white-space: pre-line;" class="mt-2 mb-0">${q.stimulus}</p>
-                               </div>`;
+                               <strong><i class="fa-solid fa-book-open-reader"></i> Bacaan / Stimulus:</strong>
+                               <p style="white-space: pre-line;" class="mt-2 mb-0">${q.stimulus}</p>
+                              </div>`;
             }
 
             if (q.gambar) {
                 htmlContent += `<div class="mb-3 text-center">
-                                 <img src="${q.gambar}" alt="Ilustrasi TKA" class="img-fluid rounded border shadow-sm" style="max-height: 220px; max-width: 100%;">
-                               </div>`;
+                               <img src="${q.gambar}" alt="Ilustrasi TKA" class="img-fluid rounded border shadow-sm" style="max-height: 220px; max-width: 100%;">
+                              </div>`;
             }
 
             htmlContent += `<div class="question-box">${currentQuestionIndex + 1}. ${q.q}</div>`;
@@ -393,14 +403,14 @@
                 });
             } else if (q.jenisSoal === "tabel-matriks" && q.rows) {
                 htmlContent += `<table class="matrix-table">
-                                 <thead>
-                                    <tr>
-                                        <th>Pernyataan</th>
-                                        <th>Benar</th>
-                                        <th>Salah</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>`;
+                               <thead>
+                                <tr>
+                                    <th>Pernyataan</th>
+                                    <th>Benar</th>
+                                    <th>Salah</th>
+                                </tr>
+                               </thead>
+                               <tbody>`;
                 q.rows.forEach((row, rIdx) => {
                     htmlContent += `<tr>
                                         <td>${row.text}</td>
@@ -415,9 +425,9 @@
                 
                 q.pairs.forEach((pair, pIdx) => {
                     htmlContent += `<div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; background: #f8fafc; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;">
-                                     <span style="font-weight: 600; flex: 1;">${pIdx + 1}. ${pair.question}</span>
-                                     <select name="match-answer-${pIdx}" class="match-select" onchange="checkAnswerState()" style="padding: 10px; border-radius: 8px; border: 2px solid var(--border); font-size: 14px; background: #fff; width: 200px; outline: none;">
-                                         <option value="">-- Pilih Jawaban --</option>`;
+                                   <span style="font-weight: 600; flex: 1;">${pIdx + 1}. ${pair.question}</span>
+                                   <select name="match-answer-${pIdx}" class="match-select" onchange="checkAnswerState()" style="padding: 10px; border-radius: 8px; border: 2px solid var(--border); font-size: 14px; background: #fff; width: 200px; outline: none;">
+                                        <option value="">-- Pilih Jawaban --</option>`;
                     if (q.options) {
                         q.options.forEach((opt) => {
                             htmlContent += `<option value="${opt}">${opt}</option>`;
@@ -428,10 +438,10 @@
                 htmlContent += `</div>`;
             } else if (q.jenisSoal === "isian-singkat") {
                 htmlContent += `<div style="margin-top: 10px;">
-                                 <input type="text" id="userInputText" placeholder="Ketik jawaban singkat di sini..." 
-                                        style="width: 100%; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; font-size: 15px; outline: none; background: #fff;"
-                                        oninput="checkAnswerState()">
-                               </div>`;
+                               <input type="text" id="userInputText" placeholder="Ketik jawaban singkat di sini..." 
+                                     style="width: 100%; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; font-size: 15px; outline: none; background: #fff;"
+                                     oninput="checkAnswerState()">
+                              </div>`;
             } else {
                 if (q.options && Array.isArray(q.options)) {
                     q.options.forEach((opt, idx) => {
