@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Semester (Kelas 1-12) - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3);
+            --radius: 20px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; }
+        
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; position: relative; }
+        
+        /* WATERMARK BULAT DI TENGAH */
+        .container::before {
+            content: "UJIAN SEMESTER\A REGULER\A KELAS 1-12";
+            white-space: pre;
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border: 4px dashed rgba(59, 130, 246, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: rgba(59, 130, 246, 0.08);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 1px;
+        }
+
+        .app-header { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; padding: 25px 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
+        .app-title { display: flex; align-items: center; gap: 15px; }
+        .app-title i { font-size: 32px; background: rgba(255, 255, 255, 0.15); padding: 12px; border-radius: 14px; }
+        .app-title h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
+        .app-title p { font-size: 12px; opacity: 0.85; }
+
+        .section { padding: 35px; display: none; position: relative; z-index: 2; }
+        .section.active { display: block; }
+        
+        h2.section-heading { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        p.section-desc { color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px; line-height: 1.6; }
+
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-bottom: 25px; }
+        .category-card { border: 2px solid var(--border); border-radius: 16px; padding: 20px; text-align: left; cursor: pointer; transition: all 0.3s; background: rgba(255, 255, 255, 0.95); }
+        .category-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08); border-color: var(--primary); }
+        .category-card i { font-size: 24px; margin-bottom: 12px; padding: 10px; border-radius: 10px; display: inline-block; }
+        .category-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
+        .category-card p { font-size: 12px; color: var(--text-muted); }
+
+        /* WARNA KELAS: SD = Merah, SMP = Biru, SMA = Hijau */
+        .card-sd { border-left: 5px solid #ef4444; }
+        .card-sd i { color: #ef4444; background: #fee2e2; }
+        
+        .card-smp { border-left: 5px solid #3b82f6; }
+        .card-smp i { color: #3b82f6; background: #eff6ff; }
+        
+        .card-sma { border-left: 5px solid #22c55e; }
+        .card-sma i { color: #22c55e; background: #dcfce7; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
+
+        /* KUIS & SOAL */
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; color: var(--primary); }
+        .question-box { font-size: 17px; font-weight: 700; margin-bottom: 20px; line-height: 1.6; color: var(--text-main); }
+        .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .option-btn { text-align: left; padding: 14px 18px; border: 2px solid var(--border); border-radius: 12px; background: #fff; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .option-btn:hover { border-color: var(--primary); background: #f8fafc; }
+        .option-btn.selected { background: #eff6ff; border-color: var(--primary); color: var(--primary); }
+
+        .result-card { text-align: center; padding: 15px 0; }
+        .score-circle { width: 110px; height: 110px; background: #ecfdf5; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid #10b981; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2); }
+
+        /* RUANG IKLAN */
+        .ad-container { text-align: center; margin-bottom: 20px; padding: 12px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; }
+        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+
+        /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
+        .draggable-donate { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 22px; border-radius: 35px; font-size: 14.5px; font-weight: 800; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 10px; cursor: grab; z-index: 9999; border: 2px solid #fff; user-select: none; touch-action: none; }
+        .draggable-donate:active { cursor: grabbing; transform: scale(0.96); }
+
+        /* FOOTER HAK CIPTA */
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.7); font-weight: 600; letter-spacing: 0.5px; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+    </style>
+</head>
+<body>
+
+    <!-- TOMBOL DONASI MENGAPUNG (BISA DIGESER) -->
+    <div id="floatingDonateBtn" class="draggable-donate" onclick="openDonateModal()">
+        <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi (Geser Saya)
+    </div>
+
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-file-lines"></i>
+                <div>
+                    <h1>Ujian Semester Reguler</h1>
+                    <p id="activeUserBadge">Siswa: Memuat...</p>
+                </div>
+            </div>
+            <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: #64748b; box-shadow: none;" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-arrow-left"></i> Menu Utama
+            </button>
+        </div>
+
+        <!-- SECTION 1: PILIH KELAS / JENJANG -->
+        <div id="section-packets" class="section active">
+            <h2 class="section-heading">Pilih Kelas / Jenjang Pendidikan</h2>
+            <p class="section-desc">Silakan pilih kelas ujian semester untuk mengakses daftar mata pelajaran:</p>
+            <div class="category-grid" id="packetGridContainer"></div>
+            
+            <div class="ad-container" style="margin-top: 25px;">
+                <p>- Ruang Iklan / Sponsor -</p>
+                <div style="font-size: 12px; color: var(--text-muted); padding: 5px;">[ Slot Banner Iklan ]</div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: PILIH MATA PELAJARAN -->
+        <div id="section-subjects" class="section">
+            <h2 class="section-heading" id="classSubjectTitle">Pilih Mata Pelajaran</h2>
+            <p class="section-desc">Silakan pilih bidang studi yang ingin diujikan:</p>
+            <div class="category-grid" id="subjectListContainer"></div>
+            <button class="btn btn-back" onclick="switchSection('section-packets')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pilih Kelas</button>
+        </div>
+
+        <!-- SECTION 3: RUANG KUIS / UJIAN -->
+        <div id="section-quiz" class="section">
+            <div class="quiz-header">
+                <span id="quizCategoryTitle">Ujian Semester</span>
+                <span id="questionCounter" style="background: #eff6ff; color: var(--primary); padding: 6px 12px; border-radius: 8px; font-size: 13px;">Soal 1 dari 10</span>
+            </div>
+            <div id="quizContainerArea">
+                <div class="question-box" id="questionText">Memuat pertanyaan...</div>
+                <div class="options-list" id="optionsContainer"></div>
+            </div>
+            <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display:none; background:#10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">Selanjutnya <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- SECTION 4: HASIL UJIAN -->
+        <div id="section-result" class="section">
+            <div class="result-card">
+                <div class="score-circle" id="finalScore">0</div>
+                <h2 class="section-heading">Ujian Semester Selesai!</h2>
+                <p class="section-desc" id="resultDesc">Nilai kamu telah terekam dalam sistem.</p>
+                <button class="btn" onclick="switchSection('section-packets')" style="margin-bottom: 12px;"><i class="fa-solid fa-rotate-right"></i> Pilih Mata Pelajaran Lain</button>
+                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i > Kembali ke Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HAK CIPTA / FOOTER -->
+    <div class="app-footer-credit">
+        © 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam
+    </div>
+
+    <!-- MODAL DONASI -->
+    <div id="donateModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 12px; color: #f59e0b; font-size: 20px;">Dukung Pengembangan Platform</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi sukarela pengembangan fitur pembelajaran.</p>
+            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 20px; border-radius: 14px; margin-bottom: 20px;">
+                <i class="fa-solid fa-qrcode" style="font-size: 56px; color: var(--warning); display: block; margin-bottom: 10px;"></i>
+                <p style="font-size: 13px; font-weight: bold; color: var(--text-main);">[ Barcode QRIS Resmi GanosecTeam ]</p>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ganosec19Team,%20saya%20mendukung%20SmartGen%20Academy." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            </a>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none;" onclick="closeDonateModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- HUBUNGKAN SEMUA FILE DATABASE SOAL KELAS 1-12 -->
+    <script src="soal-data-kelas1.js"></script>
+    <script src="soal-data-kelas2.js"></script>
+    <script src="soal-data-kelas3.js"></script>
+    <script src="soal-data-kelas4.js"></script>
+    <script src="soal-data-kelas5.js"></script>
+    <script src="soal-data-kelas6.js"></script>
+    <script src="soal-data-kelas7.js"></script>
+    <script src="soal-data-kelas8.js"></script>
+    <script src="soal-data-kelas9.js"></script>
+    <script src="soal-data-kelas10.js"></script>
+    <script src="soal-data-kelas11.js"></script>
+    <script src="soal-data-kelas12.js"></script>
+
+    <!-- LOGIKA UJIAN SEMESTER -->
+    <script>
+        window.soalData = window.soalData || {};
+
+        let currentStudent = localStorage.getItem('smartgen_user') || 'Siswa Tamu';
+        document.getElementById('activeUserBadge').innerText = `Siswa: ${currentStudent}`;
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let activeQuestions = [];
+
+        function switchSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
+        function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
+
+        // Render daftar kelas berdasarkan data yang tersedia di file .js
+        function loadPacketList() {
+            const container = document.getElementById('packetGridContainer');
+            container.innerHTML = '';
+
+            if (Object.keys(window.soalData).length > 0) {
+                Object.keys(window.soalData).forEach(className => {
+                    const card = document.createElement('div');
+                    let colorClass = 'card-sd';
+                    const lower = className.toLowerCase();
+
+                    if (lower.includes('sma') || lower.includes('smk') || lower.includes('kelas 10') || lower.includes('kelas 11') || lower.includes('kelas 12')) {
+                        colorClass = 'card-sma';
+                    } else if (lower.includes('smp') || lower.includes('kelas 7') || lower.includes('kelas 8') || lower.includes('kelas 9')) {
+                        colorClass = 'card-smp';
+                    } else {
+                        colorClass = 'card-sd';
+                    }
+
+                    card.className = `category-card ${colorClass}`;
+                    card.innerHTML = `<i class="fa-solid fa-graduation-cap"></i><h3>${className}</h3><p>Ujian Semester Reguler</p>`;
+                    card.onclick = () => selectPacket(className);
+                    container.appendChild(card);
+                });
+            } else {
+                container.innerHTML = `<p style="color: red; text-align: center; grid-column: span 2;">Database soal belum terhubung atau kosong.</p>`;
+            }
+        }
+
+        function selectPacket(className) {
+            document.getElementById('classSubjectTitle').innerText = `Mata Pelajaran - ${className}`;
+            const container = document.getElementById('subjectListContainer');
+            container.innerHTML = '';
+
+            const subs = Object.keys(window.soalData[className] || {});
+            subs.forEach(sub => {
+                const card = document.createElement('div');
+                card.className = 'category-card card-smp';
+                card.innerHTML = `<i class="fa-solid fa-book-open"></i><h3>${sub}</h3><p>Evaluasi Pilihan Ganda</p>`;
+                card.onclick = () => startQuiz(className, sub);
+                container.appendChild(card);
+            });
+            switchSection('section-subjects');
+        }
+
+        function startQuiz(className, subject) {
+            document.getElementById('quizCategoryTitle').innerText = `${className} - ${subject}`;
+            activeQuestions = window.soalData[className][subject].pilihanGanda || [];
+            currentQuestionIndex = 0;
+            score = 0;
+            switchSection('section-quiz');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            selectedOption = null;
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            if (currentQuestionIndex >= activeQuestions.length) {
+                showResult();
+                return;
+            }
+
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('questionCounter').innerText = `Soal ${currentQuestionIndex + 1} dari ${activeQuestions.length}`;
+            document.getElementById('questionText').innerText = `${currentQuestionIndex + 1}. ${q.q}`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            if (q.options && Array.isArray(q.options)) {
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerHTML = `<strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}`;
+                    btn.onclick = () => selectOption(idx, btn);
+                    optionsContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function selectOption(idx, btn) {
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedOption = idx;
+
+            const q = activeQuestions[currentQuestionIndex];
+            if (selectedOption === q.correct) {
+                score += Math.round(100 / activeQuestions.length);
+            }
+
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResult() {
+            switchSection('section-result');
+            document.getElementById('finalScore').innerText = Math.min(score, 100);
+            document.getElementById('resultDesc').innerText = `Kerja bagus ${currentStudent}! Nilai ujian semester kamu telah terekam.`;
+        }
+
+        // Jalankan pemuatan daftar kelas saat halaman dibuka
+        window.onload = loadPacketList;
+
+        // FITUR DRAGGABLE TOMBOL DONASI
+        const floatBtn = document.getElementById('floatingDonateBtn');
+        let isDragging = false, startX, startY, initialX, initialY;
+
+        floatBtn.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            startX = e.clientX; startY = e.clientY;
+            const rect = floatBtn.getBoundingClientRect();
+            initialX = rect.left; initialY = rect.top;
+            floatBtn.setPointerCapture(e.pointerId);
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            floatBtn.style.left = (initialX + (e.clientX - startX)) + 'px';
+            floatBtn.style.top = (initialY + (e.clientY - startY)) + 'px';
+            floatBtn.style.right = 'auto'; floatBtn.style.bottom = 'auto';
+        });
+
+        document.addEventListener('pointerup', (e) => {
+            isDragging = false;
+            floatBtn.releasePointerCapture(e.pointerId);
+        });
+    </script>
+</body>
+</html>

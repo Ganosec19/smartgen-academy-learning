@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asesmen TKA Nasional (Kelas 6, 9, 12) - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.2);
+            --radius: 24px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; }
+        
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
+        
+        /* WATERMARK BULAT KHUSUS TKA DI TENGAH */
+        .container::before {
+            content: "ASESMEN TKA\A NASIONAL\A KEMENDIKDASMEN";
+            white-space: pre;
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border: 4px dashed rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 19px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: rgba(37, 99, 235, 0.06);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .app-header { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 28px 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
+        .app-title { display: flex; align-items: center; gap: 15px; }
+        .app-title i { font-size: 32px; background: rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 16px; }
+        .app-title h1 { font-size: 21px; font-weight: 800; letter-spacing: 0.5px; }
+        .app-title p { font-size: 12.5px; opacity: 0.9; }
+
+        .section { padding: 35px; display: none; position: relative; z-index: 2; }
+        .section.active { display: block; }
+        
+        h2.section-heading { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        p.section-desc { color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px; line-height: 1.6; }
+
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .category-card { border: 2px solid var(--border); border-radius: 18px; padding: 22px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; border-left: 6px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(37, 99, 235, 0.15); border-color: var(--primary); }
+        .category-card i { font-size: 24px; margin-bottom: 12px; padding: 10px; border-radius: 12px; display: inline-block; color: var(--primary); background: #eff6ff; }
+        .category-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+        .category-card p { font-size: 12.5px; color: var(--text-muted); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); }
+        .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
+
+        /* AREA STIMULUS & SOAL TKA */
+        .stimulus-box { background: #eff6ff; border-left: 5px solid var(--primary); padding: 18px 20px; border-radius: 0 14px 14px 0; margin-bottom: 20px; font-size: 14.5px; line-height: 1.6; color: #1e3a8a; }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; color: var(--primary); }
+        .question-box { font-size: 17.5px; font-weight: 700; margin-bottom: 20px; line-height: 1.6; color: var(--text-main); }
+        
+        /* PILIHAN GANDA & CHECKBOX */
+        .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .option-item { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; background: #ffffff; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+        .option-item:hover { border-color: var(--primary); background: #f8fafc; }
+        .option-item input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+
+        /* TABEL MATRIKS BENAR-SALAH */
+        .matrix-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .matrix-table th, .matrix-table td { padding: 14px; border: 1px solid var(--border); text-align: center; font-size: 14px; }
+        .matrix-table th { background: #f1f5f9; font-weight: 700; color: var(--text-main); }
+        .matrix-table td:first-child { text-align: left; font-weight: 600; }
+
+        .result-card { text-align: center; padding: 15px 0; }
+        .score-circle { width: 115px; height: 115px; background: #eff6ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid var(--primary); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2); }
+
+        /* RUANG IKLAN */
+        .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 16px; }
+        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+
+        /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
+        .draggable-donate { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 22px; border-radius: 35px; font-size: 14.5px; font-weight: 800; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 10px; cursor: grab; z-index: 9999; border: 2px solid #fff; user-select: none; touch-action: none; }
+        .draggable-donate:active { cursor: grabbing; transform: scale(0.96); }
+
+        /* FOOTER HAK CIPTA */
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.9); font-weight: 600; letter-spacing: 0.5px; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+    </style>
+</head>
+<body>
+
+    <!-- TOMBOL DONASI MENGAPUNG (BISA DIGESER) -->
+    <div id="floatingDonateBtn" class="draggable-donate" onclick="openDonateModal()">
+        <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi (Geser Saya)
+    </div>
+
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-award"></i>
+                <div>
+                    <h1>Asesmen TKA Nasional</h1>
+                    <p id="activeUserBadge">Siswa: Memuat...</p>
+                </div>
+            </div>
+            <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.2); box-shadow: none;" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-arrow-left"></i> Menu Utama
+            </button>
+        </div>
+
+        <!-- SECTION 1: PILIH PAKET TKA (TERPISAH WAJIB & PILIHAN) -->
+        <div id="section-packets" class="section active">
+            <h2 class="section-heading">Pilih Paket Modul TKA</h2>
+            <p class="section-desc">Simulasi Tes Kemampuan Akademik berstandar resmi Kemendikdasmen (Literasi, Numerasi, & Penalaran):</p>
+            
+            <div id="tkaPacketContainer"></div>
+            
+            <div class="ad-container" style="margin-top: 25px;">
+                <p>- Ruang Iklan / Sponsor -</p>
+                <div style="font-size: 12px; color: var(--text-muted); padding: 5px;">[ Slot Banner Iklan TKA ]</div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: PILIH MAPEL TKA -->
+        <div id="section-subjects" class="section">
+            <h2 class="section-heading" id="tkaSubjectTitle">Pilih Bidang Asesmen</h2>
+            <p class="section-desc">Silakan pilih mata uji TKA yang ingin dikerjakan:</p>
+            <div class="category-grid" id="tkaSubjectContainer"></div>
+            <button class="btn btn-back" onclick="switchSection('section-packets')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pilih Paket</button>
+        </div>
+
+        <!-- SECTION 3: RUANG UJIAN TKA -->
+        <div id="section-quiz" class="section">
+            <div class="quiz-header">
+                <span id="quizCategoryTitle">Ujian TKA</span>
+                <span id="questionCounter" style="background: #eff6ff; color: var(--primary); padding: 6px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 700; border: 1px solid #bfdbfe;">Soal 1 dari 10</span>
+            </div>
+            
+            <div id="quizContainerArea">
+                <!-- Konten soal dirender dinamis di sini -->
+            </div>
+
+            <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display:none; background:#10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">Selanjutnya <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- SECTION 4: HASIL UJIAN TKA -->
+        <div id="section-result" class="section">
+            <div class="result-card">
+                <div class="score-circle" id="finalScore">0</div>
+                <h2 class="section-heading">Asesmen TKA Selesai!</h2>
+                <p class="section-desc" id="resultDesc">Analisis kemampuan akademik kamu telah terekam.</p>
+                <button class="btn" onclick="switchSection('section-packets')" style="margin-bottom: 12px;"><i class="fa-solid fa-rotate-right"></i> Pilih Paket TKA Lain</button>
+                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i> Kembali ke Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HAK CIPTA / FOOTER -->
+    <div class="app-footer-credit">
+        © 2026 SmartGen Academy Learning — Developed by GanosecTeam-PuskemSmartGen
+    </div>
+
+    <!-- MODAL DONASI -->
+    <div id="donateModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 12px; color: #f59e0b; font-size: 20px;">Dukung Pengembangan Platform</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi sukarela pengembangan fitur asesmen TKA.</p>
+            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 20px; border-radius: 16px; margin-bottom: 20px;">
+                <i class="fa-solid fa-qrcode" style="font-size: 56px; color: var(--warning); display: block; margin-bottom: 10px;"></i>
+                <p style="font-size: 13px; font-weight: bold; color: var(--text-main);">[ Barcode QRIS Resmi GanosecTeam ]</p>
+            </div>
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20GanosecTeam,%20saya%20mendukung%20SmartGen%20Academy." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            </a>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none;" onclick="closeDonateModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- HUBUNGKAN DATABASE SOAL TKA -->
+    <script src="soal-data-tka-sd6.js"></script>
+    <script src="soal-data-tka-smp9.js"></script>
+    <script src="tka-indo-12.js"></script>
+    <script src="tka-matematika-12.js"></script>
+    <script src="tka-inggris-12.js"></script>
+    <script src="tka-matematika-lanjut-12.js"></script>
+    <script src="tka-indo-lanjut-12.js"></script>
+    <script src="tka-inggris-lanjut-12.js"></script>
+    <script src="tka-fisika-12.js"></script>
+    <script src="tka-kimia-12.js"></script>
+    <script src="tka-biologi-12.js"></script>
+    <script src="tka-ekonomi-12.js"></script>
+    <script src="tka-geografi-12.js"></script>
+    <script src="tka-sejarah-lanjut-12.js"></script>
+    <script src="tka-antropologi-12.js"></script>
+    <script src="tka-ppkn-12.js"></script>
+    <script src="tka-bahasa-arab-12.js"></script>
+    <script src="tka-bahasa-jerman-12.js"></script>
+    <script src="tka-bahasa-prancis-12.js"></script>
+    <script src="tka-bahasa-jepang-12.js"></script>
+    <script src="tka-bahasa-korea-12.js"></script>
+    <script src="tka-produk-kreatif-kewirausahaan-12.js"></script>
+
+    <!-- LOGIKA MESIN PERENDER TKA DINAMIS -->
+    <script>
+        window.soalData = window.soalData || {};
+
+        let currentStudent = localStorage.getItem('smartgen_user') || 'Siswa Tamu';
+        document.getElementById('activeUserBadge').innerText = `Siswa: ${currentStudent}`;
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let activeQuestions = [];
+
+        function switchSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
+        function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
+
+        // RENDER PAKET DENGAN PEMISAHAN KOTAK WAJIB & PILIHAN YANG CERAH
+        function loadTkaPackets() {
+            const container = document.getElementById('tkaPacketContainer');
+            container.innerHTML = '';
+
+            const tkaKeys = Object.keys(window.soalData).filter(k => k.toLowerCase().includes('tka'));
+
+            if (tkaKeys.length > 0) {
+                tkaKeys.forEach(packetName => {
+                    const packetData = window.soalData[packetName] || {};
+                    const allSubjects = Object.keys(packetData);
+
+                    const wajibList = ["Bahasa Indonesia", "Matematika", "Bahasa Inggris"];
+                    const mapelWajib = allSubjects.filter(s => wajibList.includes(s));
+                    const mapelPilihan = allSubjects.filter(s => !wajibList.includes(s));
+
+                    // KOTAK KELOMPOK MAPEL WAJIB
+                    if (mapelWajib.length > 0) {
+                        const boxWajib = document.createElement('div');
+                        boxWajib.style.cssText = "background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 20px; padding: 22px; margin-bottom: 22px;";
+                        boxWajib.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: #166534; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> Mata Pelajaran Wajib (${packetName})
+                                              </h3>
+                                              <p style="font-size: 13.5px; color: #15803d; margin-bottom: 16px;">Wajib dikerjakan oleh seluruh peserta:</p>`;
+                        
+                        const gridWajib = document.createElement('div');
+                        gridWajib.className = 'category-grid';
+                        gridWajib.style.marginBottom = "0";
+
+                        mapelWajib.forEach(sub => {
+                            const card = document.createElement('div');
+                            card.className = 'category-card';
+                            card.style.borderLeftColor = "#22c55e";
+                            card.innerHTML = `<i class="fa-solid fa-book-open" style="color: #16a34a; background: #dcfce7;"></i><h3>${sub}</h3><p>40 Soal • Wajib TKA</p>`;
+                            card.onclick = () => startTkaQuiz(packetName, sub);
+                            gridWajib.appendChild(card);
+                        });
+
+                        boxWajib.appendChild(gridWajib);
+                        container.appendChild(boxWajib);
+                    }
+
+                    // KOTAK KELOMPOK MAPEL PILIHAN
+                    if (mapelPilihan.length > 0) {
+                        const boxPilihan = document.createElement('div');
+                        boxPilihan.style.cssText = "background: #fffbeb; border: 2px solid #fde68a; border-radius: 20px; padding: 22px;";
+                        boxPilihan.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-layer-group" style="color: #f59e0b;"></i> Mata Pelajaran Pilihan (${packetName})
+                                              </h3>
+                                              <p style="font-size: 13.5px; color: #b45309; margin-bottom: 16px;">Pilih sesuai bidang peminatan (Pilih 2 mapel):</p>`;
+                        
+                        const gridPilihan = document.createElement('div');
+                        gridPilihan.className = 'category-grid';
+                        gridPilihan.style.marginBottom = "0";
+
+                        mapelPilihan.forEach(sub => {
+                            const card = document.createElement('div');
+                            card.className = 'category-card';
+                            card.style.borderLeftColor = "#f59e0b";
+                            card.innerHTML = `<i class="fa-solid fa-book-bookmark" style="color: #d97706; background: #fef3c7;"></i><h3>${sub}</h3><p>40 Soal • Peminatan TKA</p>`;
+                            card.onclick = () => startTkaQuiz(packetName, sub);
+                            gridPilihan.appendChild(card);
+                        });
+
+                        boxPilihan.appendChild(gridPilihan);
+                        container.appendChild(boxPilihan);
+                    }
+                });
+            } else {
+                container.innerHTML = `<p style="color: red; text-align: center; grid-column: span 2;">Database soal TKA belum terhubung.</p>`;
+            }
+        }
+
+        function startTkaQuiz(packetName, subject) {
+            document.getElementById('quizCategoryTitle').innerText = `${packetName} - ${subject}`;
+            
+            const rawQuestions = window.soalData[packetName][subject].pilihanGanda || [];
+            activeQuestions = [];
+
+            rawQuestions.forEach(item => {
+                if (item.tipe === "grup-stimulus" && item.soalList) {
+                    item.soalList.forEach(sub => {
+                        activeQuestions.push({
+                            stimulus: item.stimulus,
+                            gambar: item.gambar,
+                            q: sub.q,
+                            options: sub.options,
+                            correct: sub.correct,
+                            jenisSoal: sub.jenisSoal || "pg-biasa",
+                            rows: sub.rows,
+                            pairs: sub.pairs
+                        });
+                    });
+                } else {
+                    activeQuestions.push({
+                        stimulus: null,
+                        gambar: item.gambar,
+                        q: item.q,
+                        options: item.options,
+                        correct: item.correct,
+                        jenisSoal: item.jenisSoal || "pg-biasa",
+                        rows: item.rows,
+                        pairs: item.pairs
+                    });
+                }
+            });
+
+            currentQuestionIndex = 0;
+            score = 0;
+            switchSection('section-quiz');
+            loadTkaQuestion();
+        }
+
+        function loadTkaQuestion() {
+            document.getElementById('nextBtn').style.display = 'none';
+
+            if (currentQuestionIndex >= activeQuestions.length) {
+                showResult();
+                return;
+            }
+
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('questionCounter').innerText = `Soal ${currentQuestionIndex + 1} dari ${activeQuestions.length}`;
+            
+            const containerArea = document.getElementById('quizContainerArea');
+            let htmlContent = "";
+
+            if (q.stimulus) {
+                htmlContent += `<div class="stimulus-box">
+                                 <strong><i class="fa-solid fa-book-open-reader"></i> Bacaan / Stimulus:</strong>
+                                 <p style="white-space: pre-line;" class="mt-2 mb-0">${q.stimulus}</p>
+                               </div>`;
+            }
+
+            if (q.gambar) {
+                htmlContent += `<div class="mb-3 text-center">
+                                 <img src="${q.gambar}" alt="Ilustrasi TKA" class="img-fluid rounded border shadow-sm" style="max-height: 220px; max-width: 100%;">
+                               </div>`;
+            }
+
+            htmlContent += `<div class="question-box">${currentQuestionIndex + 1}. ${q.q}</div>`;
+            htmlContent += `<div class="options-list">`;
+
+            if (q.jenisSoal === "pg-kompleks" || Array.isArray(q.correct) && q.options) {
+                q.options.forEach((opt, idx) => {
+                    htmlContent += `<label class="option-item">
+                                     <input type="checkbox" name="tka-check" value="${idx}" onchange="checkAnswerState()">
+                                     <span><strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
+                                   </label>`;
+                });
+            } else if (q.jenisSoal === "tabel-matriks" && q.rows) {
+                htmlContent += `<table class="matrix-table">
+                                 <thead>
+                                    <tr>
+                                        <th>Pernyataan</th>
+                                        <th>Benar</th>
+                                        <th>Salah</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>`;
+                q.rows.forEach((row, rIdx) => {
+                    htmlContent += `<tr>
+                                        <td>${row.text}</td>
+                                        <td><input type="radio" name="matrix-${rIdx}" value="benar" onchange="checkAnswerState()"></td>
+                                        <td><input type="radio" name="matrix-${rIdx}" value="salah" onchange="checkAnswerState()"></td>
+                                    </tr>`;
+                });
+                htmlContent += `</tbody></table>`;
+            } else if (q.jenisSoal === "penjodohan" && q.pairs) {
+                htmlContent += `<p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;"><i class="fa-solid fa-circle-info"></i> Pasangkan pernyataan di sebelah kiri dengan pilihan yang tepat di sebelah kanan:</p>`;
+                htmlContent += `<div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">`;
+                
+                q.pairs.forEach((pair, pIdx) => {
+                    htmlContent += `<div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; background: #f8fafc; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;">
+                                     <span style="font-weight: 600; flex: 1;">${pIdx + 1}. ${pair.question}</span>
+                                     <select name="match-answer-${pIdx}" class="match-select" onchange="checkAnswerState()" style="padding: 10px; border-radius: 8px; border: 2px solid var(--border); font-size: 14px; background: #fff; width: 200px; outline: none;">
+                                         <option value="">-- Pilih Jawaban --</option>`;
+                    if (q.options) {
+                        q.options.forEach((opt) => {
+                            htmlContent += `<option value="${opt}">${opt}</option>`;
+                        });
+                    }
+                    htmlContent += `</select></div>`;
+                });
+                htmlContent += `</div>`;
+            } else if (q.jenisSoal === "isian-singkat") {
+                htmlContent += `<div style="margin-top: 10px;">
+                                 <input type="text" id="userInputText" placeholder="Ketik jawaban singkat di sini..." 
+                                        style="width: 100%; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; font-size: 15px; outline: none; background: #fff;"
+                                        oninput="checkAnswerState()">
+                               </div>`;
+            } else {
+                if (q.options && Array.isArray(q.options)) {
+                    q.options.forEach((opt, idx) => {
+                        htmlContent += `<label class="option-item">
+                                         <input type="radio" name="tka-radio" value="${idx}" onchange="checkAnswerState()">
+                                         <span><strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
+                                       </label>`;
+                    });
+                }
+            }
+
+            htmlContent += `</div>`;
+            containerArea.innerHTML = htmlContent;
+        }
+
+        function checkAnswerState() {
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+        }
+
+        function nextQuestion() {
+            const q = activeQuestions[currentQuestionIndex];
+
+            if (q.jenisSoal === "pg-kompleks" || Array.isArray(q.correct)) {
+                const checkedBoxes = document.querySelectorAll('input[name="tka-check"]:checked');
+                let userAnswers = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+                
+                if (JSON.stringify(userAnswers.sort()) === JSON.stringify(q.correct.sort())) {
+                    score += Math.round(100 / activeQuestions.length);
+                }
+            } else if (q.jenisSoal === "penjodohan" && q.pairs) {
+                let allCorrect = true;
+                q.pairs.forEach((pair, pIdx) => {
+                    const selectEl = document.querySelector(`select[name="match-answer-${pIdx}"]`);
+                    if (!selectEl || selectEl.value !== pair.correctMatch) {
+                        allCorrect = false;
+                    }
+                });
+                if (allCorrect) {
+                    score += Math.round(100 / activeQuestions.length);
+                }
+            } else if (q.jenisSoal === "isian-singkat") {
+                const textInput = document.getElementById('userInputText');
+                if (textInput && textInput.value.trim().toLowerCase() === String(q.correct).toLowerCase()) {
+                    score += Math.round(100 / activeQuestions.length);
+                }
+            } else {
+                const selectedRadio = document.querySelector('input[name="tka-radio"]:checked');
+                if (selectedRadio && parseInt(selectedRadio.value) === q.correct) {
+                    score += Math.round(100 / activeQuestions.length);
+                }
+            }
+
+            currentQuestionIndex++;
+            loadTkaQuestion();
+        }
+
+        function showResult() {
+            switchSection('section-result');
+            document.getElementById('finalScore').innerText = Math.min(score, 100);
+            document.getElementById('resultDesc').innerText = `Luar biasa ${currentStudent}! Analisis asesmen TKA nasional kamu telah tersimpan.`;
+        }
+
+        window.onload = loadTkaPackets;
+
+        // FITUR DRAGGABLE TOMBOL DONASI
+        const floatBtn = document.getElementById('floatingDonateBtn');
+        let isDragging = false, startX, startY, initialX, initialY;
+
+        floatBtn.addEventListener('pointerdown', (e) => {
+            isDragging = true;
+            startX = e.clientX; startY = e.clientY;
+            const rect = floatBtn.getBoundingClientRect();
+            initialX = rect.left; initialY = rect.top;
+            floatBtn.setPointerCapture(e.pointerId);
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            floatBtn.style.left = (initialX + (e.clientX - startX)) + 'px';
+            floatBtn.style.top = (initialY + (e.clientY - startY)) + 'px';
+            floatBtn.style.right = 'auto'; floatBtn.style.bottom = 'auto';
+        });
+
+        document.addEventListener('pointerup', (e) => {
+            isDragging = false;
+            floatBtn.releasePointerCapture(e.pointerId);
+        });
+    </script>
+</body>
+</html>
