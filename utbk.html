@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryout UTBK SNBT Premium - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Pustaka KaTeX untuk Render Rumus Matematika UTBK -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        :root {
+            --primary: #9333ea;
+            --primary-hover: #7e22ce;
+            --bg-gradient: linear-gradient(135deg, #581c87 0%, #6b21a8 50%, #3b0764 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --shadow: 0 20px 35px -10px rgba(147, 51, 234, 0.3);
+            --radius: 24px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; }
+        
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
+        
+        /* Watermark */
+        .container::before {
+            content: "UTBK SNBT\A PREMIUM\A SMARTGEN";
+            white-space: pre;
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border: 4px dashed rgba(147, 51, 234, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 19px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: rgba(147, 51, 234, 0.06);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app-header { background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%); color: white; padding: 28px 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
+        .app-title { display: flex; align-items: center; gap: 15px; }
+        .app-title i { font-size: 32px; background: rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 16px; }
+        .app-title h1 { font-size: 21px; font-weight: 800; letter-spacing: 0.5px; }
+        .app-title p { font-size: 12.5px; opacity: 0.9; }
+
+        .section { padding: 35px; display: none; position: relative; z-index: 2; }
+        .section.active { display: block; }
+        
+        h2.section-heading { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        p.section-desc { color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px; line-height: 1.6; }
+
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .category-card { border: 2px solid var(--border); border-radius: 18px; padding: 22px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; border-left: 6px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(147, 51, 234, 0.15); border-color: var(--primary); }
+        .category-card i { font-size: 24px; margin-bottom: 12px; padding: 10px; border-radius: 12px; display: inline-block; color: var(--primary); background: #f3e8ff; }
+        .category-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+        .category-card p { font-size: 12.5px; color: var(--text-muted); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(147, 51, 234, 0.3); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
+
+        .stimulus-box { background: #f3e8ff; border-left: 5px solid var(--primary); padding: 18px 20px; border-radius: 0 14px 14px 0; margin-bottom: 20px; font-size: 14.5px; line-height: 1.6; color: #581c87; }
+        
+        .visual-banner { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border: 2px solid #e9d5ff; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        .visual-banner i { font-size: 36px; color: var(--primary); margin-bottom: 8px; background: #fff; padding: 12px; border-radius: 50%; box-shadow: 0 4px 10px rgba(147,51,234,0.1); display: inline-block; }
+        .visual-banner h4 { font-size: 15px; font-weight: 800; color: #581c87; margin-bottom: 4px; }
+        .visual-banner p { font-size: 12px; color: #64748b; }
+
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; color: var(--primary); }
+        .question-box { font-size: 17.5px; font-weight: 700; margin-bottom: 20px; line-height: 1.6; color: var(--text-main); }
+        
+        .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .option-item { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; background: #ffffff; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .option-item:hover { border-color: var(--primary); background: #faf5ff; }
+        .option-item input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+
+        .result-card { text-align: center; padding: 15px 0; }
+        .score-circle { width: 115px; height: 115px; background: #f3e8ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid var(--primary); box-shadow: 0 10px 25px rgba(147, 51, 234, 0.2); }
+
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; }
+
+        /* Modal Gerbang Pembayaran QRIS & Token */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .modal-card { background: #fff; max-width: 440px; width: 100%; border-radius: var(--radius); padding: 30px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div>
+                    <h1>Tryout UTBK SNBT Premium</h1>
+                    <p id="activeUserBadge">Siswa: Memuat...</p>
+                </div>
+            </div>
+            <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.2); box-shadow: none;" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-arrow-left"></i> Menu Utama
+            </button>
+        </div>
+
+        <!-- SECTION 1: PILIH SUBTES UTBK -->
+        <div id="section-packets" class="section active">
+            <h2 class="section-heading">Paket Tryout UTBK SNBT Resmi</h2>
+            <p class="section-desc">Simulasi tes skolastik dan literasi berstandar seleksi nasional perguruan tinggi (Terkunci khusus peserta terverifikasi QRIS):</p>
+            
+            <div class="category-grid">
+                <div class="category-card" onclick="checkUtbkAccess('Subtes 1 (Penalaran Umum & Kuantitatif)')">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Subtes 1: Penalaran Umum & Kuantitatif</h3>
+                    <p>Logika induktif, deduktif, dan aljabar dasar SNBT.</p>
+                </div>
+                <div class="category-card" onclick="checkUtbkAccess('Subtes 2 (Literasi Bahasa Indonesia & Inggris)')">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <h3>Subtes 2: Literasi Bahasa & Teks</h3>
+                    <p>Analisis wacana ilmiah, gagasan utama, & evaluasi teks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: RUANG UJIAN UTBK -->
+        <div id="section-quiz" class="section">
+            <div class="quiz-header">
+                <span id="quizCategoryTitle">Ujian UTBK</span>
+                <span id="questionCounter" style="background: #f3e8ff; color: var(--primary); padding: 6px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 700; border: 1px solid #d8b4fe;">Soal 1 dari 10</span>
+            </div>
+            
+            <div id="quizContainerArea"></div>
+
+            <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display:none; background:#10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">Selanjutnya <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- SECTION 3: HASIL TRYOUT -->
+        <div id="section-result" class="section">
+            <div class="result-card">
+                <div class="score-circle" id="finalScore">0</div>
+                <h2 class="section-heading">Tryout UTBK Selesai!</h2>
+                <p class="section-desc" id="resultDesc">Analisis kemampuan kognitif SNBT kamu terekam.</p>
+                <button class="btn" onclick="switchSection('section-packets')" style="margin-bottom: 12px;"><i class="fa-solid fa-rotate-right"></i> Pilih Subtes Lain</button>
+                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i> Kembali ke Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL GERBANG PEMBAYARAN QRIS & TOKEN -->
+    <div id="utbkModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 8px; color: var(--primary); font-size: 20px;"><i class="fa-solid fa-lock"></i> Akses UTBK Premium</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
+                Modul tryout ini terkunci. Silakan lakukan donasi/pembayaran via QRIS di bawah ini, lalu konfirmasi ke WhatsApp Admin untuk mendapatkan <b>Token Akses Unik</b>.
+            </p>
+            
+            <!-- Gambar QRIS -->
+            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 14px; border-radius: 14px; margin-bottom: 16px;">
+                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 240px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 8px;">
+                <p style="font-size: 12px; font-weight: 700; color: var(--text-main);">Merchant: SmartGen Academy Learning</p>
+            </div>
+
+            <!-- Input Token -->
+            <div style="margin-bottom: 14px;">
+                <input type="text" id="tokenInput" placeholder="Masukkan Token Akses (Cth: UTBK2026)" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 14px; text-align: center; outline: none; background: #f8fafc;">
+            </div>
+
+            <button class="btn" onclick="verifyToken()" style="margin-bottom: 10px;"><i class="fa-solid fa-key"></i> Aktifkan & Masuk Ujian</button>
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20transfer%20pembayaran%20QRIS%20untuk%20Tryout%20UTBK%20SmartGen%20Academy." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; font-size: 14px; padding: 12px;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            </a>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; font-size: 14px; padding: 12px;" onclick="closeUtbkModal()">Tutup</button>
+        </div>
+    </div>
+
+    <div class="app-footer-credit">
+        © 2026 SmartGen Academy Learning — Developed by Ganosec19Team
+    </div>
+
+    <!-- Hubungkan Bank Soal UTBK -->
+    <script src="soal-data-utbk.js"></script>
+
+    <script>
+        let currentStudent = localStorage.getItem('smartgen_user') || 'Siswa Tamu';
+        document.getElementById('activeUserBadge').innerText = `Siswa: ${currentStudent}`;
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let activeQuestions = [];
+        let selectedSubjectCache = "";
+
+        function switchSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // Sistem Cek Hak Akses Berbayar via Token
+        function checkUtbkAccess(subjectName) {
+            selectedSubjectCache = subjectName;
+            const isUnlocked = localStorage.getItem('utbk_premium_unlocked');
+
+            if (isUnlocked === "true") {
+                startUtbkQuiz(subjectName);
+            } else {
+                document.getElementById('utbkModal').style.display = 'flex';
+            }
+        }
+
+        function closeUtbkModal() {
+            document.getElementById('utbkModal').style.display = 'none';
+        }
+
+        function verifyToken() {
+            const tokenVal = document.getElementById('tokenInput').value.trim();
+            // Token rahasia yang diberikan admin setelah siswa membayar via QRIS
+            if (tokenVal === "UTBK2026") {
+                localStorage.setItem('utbk_premium_unlocked', 'true');
+                closeUtbkModal();
+                alert("Verifikasi Berhasil! Selamat mengerjakan Tryout UTBK Premium.");
+                startUtbkQuiz(selectedSubjectCache);
+            } else {
+                alert("Token Akses salah atau belum aktif. Silakan lakukan pembayaran via QRIS dan konfirmasi ke WhatsApp Admin.");
+            }
+        }
+
+        function startUtbkQuiz(subjectName) {
+            document.getElementById('quizCategoryTitle').innerText = subjectName;
+            
+            const packetData = window.soalData["Tryout UTBK SNBT Premium"] || {};
+            const rawQuestions = packetData[subjectName]?.pilihanGanda || [];
+            activeQuestions = [];
+
+            rawQuestions.forEach(item => {
+                if (item.tipe === "grup-stimulus" && item.soalList) {
+                    item.soalList.forEach(sub => {
+                        activeQuestions.push({
+                            stimulus: item.stimulus,
+                            bannerIcon: item.bannerIcon || null,
+                            bannerTitle: item.bannerTitle || null,
+                            q: sub.q,
+                            options: sub.options,
+                            correct: sub.correct,
+                            jenisSoal: sub.jenisSoal || "pg-biasa",
+                            rows: sub.rows
+                        });
+                    });
+                } else {
+                    activeQuestions.push({
+                        stimulus: null,
+                        bannerIcon: null,
+                        bannerTitle: null,
+                        q: item.q,
+                        options: item.options,
+                        correct: item.correct,
+                        jenisSoal: item.jenisSoal || "pg-biasa",
+                        rows: item.rows
+                    });
+                }
+            });
+
+            currentQuestionIndex = 0;
+            score = 0;
+            switchSection('section-quiz');
+            loadUtbkQuestion();
+        }
+
+        function loadUtbkQuestion() {
+            document.getElementById('nextBtn').style.display = 'none';
+
+            if (currentQuestionIndex >= activeQuestions.length) {
+                showResult();
+                return;
+            }
+
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('questionCounter').innerText = `Soal ${currentQuestionIndex + 1} dari ${activeQuestions.length}`;
+            
+            const containerArea = document.getElementById('quizContainerArea');
+            let htmlContent = "";
+
+            if (q.stimulus) {
+                htmlContent += `<div class="stimulus-box">
+                               <strong><i class="fa-solid fa-book-open-reader"></i> Wacana / Stimulus SNBT:</strong>
+                               <p style="white-space: pre-line;" class="mt-2 mb-0">${q.stimulus}</p>
+                              </div>`;
+            }
+
+            if (q.bannerIcon) {
+                htmlContent += `<div class="visual-banner">
+                               <i class="${q.bannerIcon}"></i>
+                               <h4>${q.bannerTitle}</h4>
+                               <p>Analisis wacana di atas dengan cermat.</p>
+                              </div>`;
+            }
+
+            htmlContent += `<div class="question-box">${currentQuestionIndex + 1}. ${q.q}</div>`;
+            htmlContent += `<div class="options-list">`;
+
+            if (q.jenisSoal === "tabel-matriks" && q.rows) {
+                htmlContent += `<table style="width:100%; border-collapse:collapse; margin-bottom:20px; background:#fff; border-radius:12px; overflow:hidden; border:1px solid var(--border);">
+                               <thead><tr style="background:#f8fafc;"><th style="padding:12px; border:1px solid var(--border);">Pernyataan</th><th style="padding:12px; border:1px solid var(--border);">Benar</th><th style="padding:12px; border:1px solid var(--border);">Salah</th></tr></thead><tbody>`;
+                q.rows.forEach((row, rIdx) => {
+                    htmlContent += `<tr><td style="padding:12px; border:1px solid var(--border); font-weight:600;">${row.text}</td>
+                                    <td style="text-align:center; padding:12px; border:1px solid var(--border);"><input type="radio" name="matrix-${rIdx}" value="benar" onchange="checkAnswerState()"></td>
+                                    <td style="text-align:center; padding:12px; border:1px solid var(--border);"><input type="radio" name="matrix-${rIdx}" value="salah" onchange="checkAnswerState()"></td></tr>`;
+                });
+                htmlContent += `</tbody></table>`;
+            } else {
+                if (q.options && Array.isArray(q.options)) {
+                    q.options.forEach((opt, idx) => {
+                        htmlContent += `<label class="option-item">
+                                       <input type="radio" name="utbk-radio" value="${idx}" onchange="checkAnswerState()">
+                                       <span><strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
+                                       </label>`;
+                    });
+                }
+            }
+
+            htmlContent += `</div>`;
+            containerArea.innerHTML = htmlContent;
+
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(containerArea, {
+                    delimiters: [{left: '$', right: '$', display: false}],
+                    throwOnError: false
+                });
+            }
+        }
+
+        function checkAnswerState() {
+            document.getElementById('nextBtn').style.display = 'inline-flex';
+        }
+
+        function nextQuestion() {
+            const q = activeQuestions[currentQuestionIndex];
+            const selectedRadio = document.querySelector('input[name="utbk-radio"]:checked');
+
+            if (selectedRadio && parseInt(selectedRadio.value) === q.correct) {
+                score += Math.round(100 / activeQuestions.length);
+            }
+
+            currentQuestionIndex++;
+            loadUtbkQuestion();
+        }
+
+        function showResult() {
+            switchSection('section-result');
+            document.getElementById('finalScore').innerText = Math.min(score, 100);
+            document.getElementById('resultDesc').innerText = `Luar biasa ${currentStudent}! Evaluasi kemampuan UTBK SNBT kamu telah terekam.`;
+        }
+    </script>
+</body>
+</html>
