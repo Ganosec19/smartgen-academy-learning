@@ -95,7 +95,7 @@
         .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; overflow: hidden; }
         .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
-        /* FOOTER KECIL DIAM DI BAWAH + TOMBOL DONASI Kecil */
+        /* FOOTER & TOMBOL DONASI */
         .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .footer-donate-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
         .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
@@ -115,13 +115,8 @@
                     <p id="activeUserBadge">Siswa: Memuat...</p>
                 </div>
             </div>
-            <!-- Tombol Donasi di Atas & Menu Utama -->
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: #f59e0b; box-shadow: none;" onclick="openDonateModal()">Donasi</button>
-                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.2); box-shadow: none;" onclick="window.location.href='index.html'">
-                    <i class="fa-solid fa-house"></i> Menu Utama
-                </button>
-            </div>
+            <!-- TOMBOL DONASI PERSIS SEPERTI INDEX.HTML DI POJOK KANAN ATAS -->
+            <button class="btn" style="width: auto; padding: 10px 22px; font-size: 13.5px; background: #f59e0b; box-shadow: none;" onclick="openDonateModal()">Donasi</button>
         </div>
 
         <!-- SECTION 1: PILIH KELAS / JENJANG -->
@@ -179,7 +174,7 @@
         </div>
     </div>
 
-    <!-- FOOTER DENGAN TOMBOL DONASI KECIL DI BAWAH -->
+    <!-- FOOTER DENGAN TOMBOL DONASI PADA SERVER PERSIS SEPERTI INDEX.HTML -->
     <div class="app-footer-credit">
         <button class="footer-donate-btn" onclick="openDonateModal()">
             <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
@@ -316,7 +311,6 @@
                 return;
             }
 
-            The_q = activeQuestions[currentQuestionIndex];
             const q = activeQuestions[currentQuestionIndex];
             document.getElementById('questionCounter').innerText = `Soal ${currentQuestionIndex + 1} dari ${activeQuestions.length}`;
             document.getElementById('questionText').innerText = `${currentQuestionIndex + 1}. ${q.q}`;
