@@ -1,4 +1,4 @@
-// Bank Soal SmartGen Academy Learning - Kelas 2 SD (Kurikulum Merdeka)
+// Bank Soal SmartGen Academy Learning - Kelas 1 SD (Kurikulum Merdeka)
 window.soalData = window.soalData || {};
 
 soalData["SD - Kelas 1"] = {
