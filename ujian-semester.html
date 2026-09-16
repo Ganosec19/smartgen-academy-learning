@@ -69,7 +69,6 @@
         .category-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
         .category-card p { font-size: 12px; color: var(--text-muted); }
 
-        /* WARNA KELAS: SD = Merah, SMP = Biru, SMA = Hijau */
         .card-sd { border-left: 5px solid #ef4444; }
         .card-sd i { color: #ef4444; background: #fee2e2; }
         
@@ -83,7 +82,6 @@
         .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
         .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
 
-        /* KUIS & SOAL */
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; color: var(--primary); }
         .question-box { font-size: 17px; font-weight: 700; margin-bottom: 20px; line-height: 1.6; color: var(--text-main); }
         .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
@@ -94,28 +92,19 @@
         .result-card { text-align: center; padding: 15px 0; }
         .score-circle { width: 110px; height: 110px; background: #ecfdf5; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid #10b981; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2); }
 
-        /* RUANG IKLAN ADSTERRA */
         .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; overflow: hidden; }
         .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
-        /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
-        .draggable-donate { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 22px; border-radius: 35px; font-size: 14.5px; font-weight: 800; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 10px; cursor: grab; z-index: 9999; border: 2px solid #fff; user-select: none; touch-action: none; }
-        .draggable-donate:active { cursor: grabbing; transform: scale(0.96); }
+        /* FOOTER KECIL DIAM DI BAWAH + TOMBOL DONASI Kecil */
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .footer-donate-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
 
-        /* FOOTER HAK CIPTA */
-        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.7); font-weight: 600; letter-spacing: 0.5px; }
-
-        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
         .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
     </style>
 </head>
 <body>
-
-    <!-- TOMBOL DONASI MENGAPUNG (BISA DIGESER) -->
-    <div id="floatingDonateBtn" class="draggable-donate" onclick="openDonateModal()">
-        <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi (Geser Saya)
-    </div>
 
     <div class="container">
         <div class="app-header">
@@ -126,9 +115,13 @@
                     <p id="activeUserBadge">Siswa: Memuat...</p>
                 </div>
             </div>
-            <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: #64748b; box-shadow: none;" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-arrow-left"></i> Menu Utama
-            </button>
+            <!-- Tombol Donasi di Atas & Menu Utama -->
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: #f59e0b; box-shadow: none;" onclick="openDonateModal()">Donasi</button>
+                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.2); box-shadow: none;" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-house"></i> Menu Utama
+                </button>
+            </div>
         </div>
 
         <!-- SECTION 1: PILIH KELAS / JENJANG -->
@@ -186,9 +179,12 @@
         </div>
     </div>
 
-    <!-- HAK CIPTA / FOOTER -->
+    <!-- FOOTER DENGAN TOMBOL DONASI KECIL DI BAWAH -->
     <div class="app-footer-credit">
-        © 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam
+        <button class="footer-donate-btn" onclick="openDonateModal()">
+            <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
+        </button>
+        <div>© 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
     </div>
 
     <!-- MODAL DONASI DENGAN QRIS & WA RESMI -->
@@ -202,7 +198,7 @@
                 <p style="font-size: 12px; font-weight: 700; color: var(--text-main); margin-top: 10px;">Merchant: CS SmartGen Academy Learning</p>
             </div>
             
-            <!-- KODE IKLAN ADSTERRA BARU DI MODAL -->
+            <!-- KODE IKLAN ADSTERRA DI MODAL -->
             <div style="text-align: center; margin-bottom: 16px; padding: 10px; background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; overflow: hidden;">
                 <script>
                   atOptions = {
@@ -320,6 +316,7 @@
                 return;
             }
 
+            The_q = activeQuestions[currentQuestionIndex];
             const q = activeQuestions[currentQuestionIndex];
             document.getElementById('questionCounter').innerText = `Soal ${currentQuestionIndex + 1} dari ${activeQuestions.length}`;
             document.getElementById('questionText').innerText = `${currentQuestionIndex + 1}. ${q.q}`;
@@ -362,33 +359,7 @@
             document.getElementById('resultDesc').innerText = `Kerja bagus ${currentStudent}! Nilai ujian semester kamu telah terekam.`;
         }
 
-        // Jalankan pemuatan daftar kelas saat halaman dibuka
         window.onload = loadPacketList;
-
-        // FITUR DRAGGABLE TOMBOL DONASI
-        const floatBtn = document.getElementById('floatingDonateBtn');
-        let isDragging = false, startX, startY, initialX, initialY;
-
-        floatBtn.addEventListener('pointerdown', (e) => {
-            isDragging = true;
-            startX = e.clientX; startY = e.clientY;
-            const rect = floatBtn.getBoundingClientRect();
-            initialX = rect.left; initialY = rect.top;
-            floatBtn.setPointerCapture(e.pointerId);
-        });
-
-        document.addEventListener('pointermove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            floatBtn.style.left = (initialX + (e.clientX - startX)) + 'px';
-            floatBtn.style.top = (initialY + (e.clientY - startY)) + 'px';
-            floatBtn.style.right = 'auto'; floatBtn.style.bottom = 'auto';
-        });
-
-        document.addEventListener('pointerup', (e) => {
-            isDragging = false;
-            floatBtn.releasePointerCapture(e.pointerId);
-        });
     </script>
 </body>
 </html>
