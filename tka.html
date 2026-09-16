@@ -25,7 +25,6 @@
         
         .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
         
-        /* WATERMARK BULAT KHUSUS TKA DI TENGAH */
         .container::before {
             content: "ASESMEN TKA\A NASIONAL\A KEMENDIKDASMEN";
             white-space: pre;
@@ -73,18 +72,22 @@
         .btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); }
         .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
 
-        /* AREA STIMULUS & SOAL TKA */
         .stimulus-box { background: #eff6ff; border-left: 5px solid var(--primary); padding: 18px 20px; border-radius: 0 14px 14px 0; margin-bottom: 20px; font-size: 14.5px; line-height: 1.6; color: #1e3a8a; }
+        
+        /* BANNER ILUSTRASI IKON TEMATIK YANG PASTI MUNCUL */
+        .visual-banner { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #bfdbfe; border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05); }
+        .visual-banner i { font-size: 36px; color: var(--primary); margin-bottom: 8px; background: #fff; padding: 12px; border-radius: 50%; box-shadow: 0 4px 10px rgba(37,99,235,0.1); display: inline-block; }
+        .visual-banner h4 { font-size: 15px; font-weight: 800; color: #1e40af; margin-bottom: 4px; }
+        .visual-banner p { font-size: 12px; color: #64748b; }
+
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; color: var(--primary); }
         .question-box { font-size: 17.5px; font-weight: 700; margin-bottom: 20px; line-height: 1.6; color: var(--text-main); }
         
-        /* PILIHAN GANDA & CHECKBOX */
         .options-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
         .option-item { display: flex; align-items: center; gap: 12px; padding: 15px 18px; border: 2px solid var(--border); border-radius: 14px; background: #ffffff; font-size: 15px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
         .option-item:hover { border-color: var(--primary); background: #f8fafc; }
         .option-item input { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
 
-        /* TABEL MATRIKS BENAR-SALAH */
         .matrix-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .matrix-table th, .matrix-table td { padding: 14px; border: 1px solid var(--border); text-align: center; font-size: 14px; }
         .matrix-table th { background: #f1f5f9; font-weight: 700; color: var(--text-main); }
@@ -93,25 +96,20 @@
         .result-card { text-align: center; padding: 15px 0; }
         .score-circle { width: 115px; height: 115px; background: #eff6ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid var(--primary); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2); }
 
-        /* RUANG IKLAN ADSTERRA */
         .ad-container { text-align: center; margin-bottom: 20px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 16px; overflow: hidden; }
         .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
-        /* TOMBOL DONASI MENGAPUNG (DRAGGABLE) */
         .draggable-donate { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 22px; border-radius: 35px; font-size: 14.5px; font-weight: 800; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); display: flex; align-items: center; gap: 10px; cursor: grab; z-index: 9999; border: 2px solid #fff; user-select: none; touch-action: none; }
         .draggable-donate:active { cursor: grabbing; transform: scale(0.96); }
 
-        /* FOOTER HAK CIPTA */
         .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.9); font-weight: 600; letter-spacing: 0.5px; }
 
-        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
         .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
     </style>
 </head>
 <body>
 
-    <!-- TOMBOL DONASI MENGAPUNG (BISA DIGESER) -->
     <div id="floatingDonateBtn" class="draggable-donate" onclick="openDonateModal()">
         <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi (Geser Saya)
     </div>
@@ -130,14 +128,12 @@
             </button>
         </div>
 
-        <!-- SECTION 1: PILIH PAKET TKA (TERPISAH BERDASARKAN JENJANG) -->
         <div id="section-packets" class="section active">
             <h2 class="section-heading">Pilih Paket Modul TKA</h2>
             <p class="section-desc">Simulasi Tes Kemampuan Akademik berstandar resmi Kemendikdasmen (Literasi, Numerasi, & Penalaran):</p>
             
             <div id="tkaPacketContainer"></div>
             
-            <!-- SLOT IKLAN ADSTERRA BANNER -->
             <div class="ad-container" style="margin-top: 25px;">
                 <p>- Sponsor / Informasi Iklan -</p>
                 <script>
@@ -153,7 +149,6 @@
             </div>
         </div>
 
-        <!-- SECTION 2: PILIH MAPEL TKA -->
         <div id="section-subjects" class="section">
             <h2 class="section-heading" id="tkaSubjectTitle">Pilih Bidang Asesmen</h2>
             <p class="section-desc">Silakan pilih mata uji TKA yang ingin dikerjakan:</p>
@@ -161,21 +156,17 @@
             <button class="btn btn-back" onclick="switchSection('section-packets')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pilih Paket</button>
         </div>
 
-        <!-- SECTION 3: RUANG UJIAN TKA -->
         <div id="section-quiz" class="section">
             <div class="quiz-header">
                 <span id="quizCategoryTitle">Ujian TKA</span>
                 <span id="questionCounter" style="background: #eff6ff; color: var(--primary); padding: 6px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 700; border: 1px solid #bfdbfe;">Soal 1 dari 10</span>
             </div>
             
-            <div id="quizContainerArea">
-                <!-- Konten soal dirender dinamis di sini -->
-            </div>
+            <div id="quizContainerArea"></div>
 
             <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display:none; background:#10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">Selanjutnya <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
-        <!-- SECTION 4: HASIL UJIAN TKA -->
         <div id="section-result" class="section">
             <div class="result-card">
                 <div class="score-circle" id="finalScore">0</div>
@@ -187,12 +178,10 @@
         </div>
     </div>
 
-    <!-- HAK CIPTA / FOOTER -->
     <div class="app-footer-credit">
         © 2026 SmartGen Academy Learning — Developed by GanosecTeam-PuskemSmartGen
     </div>
 
-    <!-- MODAL DONASI -->
     <div id="donateModal" class="modal-overlay">
         <div class="modal-card">
             <h3 style="margin-bottom: 12px; color: #f59e0b; font-size: 20px;">Dukung Pengembangan Platform</h3>
@@ -208,7 +197,6 @@
         </div>
     </div>
 
-    <!-- HUBUNGKAN DATABASE SOAL TKA -->
     <script src="soal-data-tka-sd6.js"></script>
     <script src="soal-data-tka-smp9.js"></script>
     <script src="tka-indo-12.js"></script>
@@ -232,7 +220,6 @@
     <script src="tka-bahasa-korea-12.js"></script>
     <script src="tka-produk-kreatif-kewirausahaan-12.js"></script>
 
-    <!-- LOGIKA MESIN PERENDER TKA DINAMIS -->
     <script>
         window.soalData = window.soalData || {};
 
@@ -251,7 +238,6 @@
         function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
         function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
 
-        // RENDER PAKET DENGAN PEMISAHAN KOTAK BERDASARKAN JENJANG
         function loadTkaPackets() {
             const container = document.getElementById('tkaPacketContainer');
             container.innerHTML = '';
@@ -263,13 +249,26 @@
                     const packetData = window.soalData[packetName] || {};
                     const allSubjects = Object.keys(packetData);
 
-                    // Buat kotak pembungkus per jenjang/paket
+                    let themeBg, themeBorder, themeText, iconColor, cardBorderLeft, cardIconBg, cardIconColor;
+                    
+                    const nameLower = packetName.toLowerCase();
+                    if (nameLower.includes('12') || nameLower.includes('sma')) {
+                        themeBg = "#fff1f2"; themeBorder = "#fecdd3"; themeText = "#be123c"; iconColor = "#e11d48";
+                        cardBorderLeft = "#f43f5e"; cardIconBg = "#ffe4e6"; cardIconColor = "#e11d48";
+                    } else if (nameLower.includes('9') || nameLower.includes('smp')) {
+                        themeBg = "#eff6ff"; themeBorder = "#bfdbfe"; themeText = "#1d4ed8"; iconColor = "#2563eb";
+                        cardBorderLeft = "#3b82f6"; cardIconBg = "#dbeafe"; cardIconColor = "#2563eb";
+                    } else {
+                        themeBg = "#fefce8"; themeBorder = "#fef08a"; themeText = "#a16207"; iconColor = "#ca8a04";
+                        cardBorderLeft = "#eab308"; cardIconBg = "#fef9c3"; cardIconColor = "#ca8a04";
+                    }
+
                     const boxPaket = document.createElement('div');
-                    boxPaket.style.cssText = "background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);";
-                    boxPaket.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
-                                            <i class="fa-solid fa-graduation-cap"></i> ${packetName}
+                    boxPaket.style.cssText = `background: ${themeBg}; border: 2px solid ${themeBorder}; border-radius: 20px; padding: 22px; margin-bottom: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);`;
+                    boxPaket.innerHTML = `<h3 style="font-size: 18px; font-weight: 800; color: ${themeText}; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                                            <i class="fa-solid fa-graduation-cap" style="color: ${iconColor};"></i> ${packetName}
                                        </h3>
-                                       <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">Pilih mata uji untuk memulai asesmen:</p>`;
+                                       <p style="font-size: 13.5px; color: ${themeText}; opacity: 0.85; margin-bottom: 16px;">Pilih mata uji asesmen di bawah ini:</p>`;
                     
                     const gridMapel = document.createElement('div');
                     gridMapel.className = 'category-grid';
@@ -278,7 +277,8 @@
                     allSubjects.forEach(sub => {
                         const card = document.createElement('div');
                         card.className = 'category-card';
-                        card.innerHTML = `<i class="fa-solid fa-book-open"></i><h3>${sub}</h3><p>Modul Resmi TKA</p>`;
+                        card.style.borderLeftColor = cardBorderLeft;
+                        card.innerHTML = `<i class="fa-solid fa-book-open" style="color: ${cardIconColor}; background: ${cardIconBg};"></i><h3>${sub}</h3><p>Modul Resmi TKA</p>`;
                         card.onclick = () => startTkaQuiz(packetName, sub);
                         gridMapel.appendChild(card);
                     });
@@ -302,7 +302,8 @@
                     item.soalList.forEach(sub => {
                         activeQuestions.push({
                             stimulus: item.stimulus,
-                            gambar: item.gambar,
+                            bannerIcon: item.bannerIcon || null,
+                            bannerTitle: item.bannerTitle || null,
                             q: sub.q,
                             options: sub.options,
                             correct: sub.correct,
@@ -314,7 +315,8 @@
                 } else {
                     activeQuestions.push({
                         stimulus: null,
-                        gambar: item.gambar,
+                        bannerIcon: null,
+                        bannerTitle: null,
                         q: item.q,
                         options: item.options,
                         correct: item.correct,
@@ -352,9 +354,12 @@
                               </div>`;
             }
 
-            if (q.gambar) {
-                htmlContent += `<div class="mb-3 text-center">
-                               <img src="${q.gambar}" alt="Ilustrasi TKA" class="img-fluid rounded border shadow-sm" style="max-height: 220px; max-width: 100%;">
+            // MUNCULKAN BANNER IKON VISUAL TEMATIK UNTUK KELAS 6
+            if (q.bannerIcon) {
+                htmlContent += `<div class="visual-banner">
+                               <i class="${q.bannerIcon}"></i>
+                               <h4>${q.bannerTitle}</h4>
+                               <p>Perhatikan informasi stimulus di atas untuk menjawab soal berikut.</p>
                               </div>`;
             }
 
@@ -473,7 +478,6 @@
 
         window.onload = loadTkaPackets;
 
-        // FITUR DRAGGABLE TOMBOL DONASI
         const floatBtn = document.getElementById('floatingDonateBtn');
         let isDragging = false, startX, startY, initialX, initialY;
 
