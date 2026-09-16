@@ -107,7 +107,7 @@
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
-        .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        .modal-card { background: #fff; max-width: 420px; width: 100%; border-radius: var(--radius); padding: 35px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
     </style>
 </head>
 <body>
@@ -191,14 +191,15 @@
         © 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam
     </div>
 
-    <!-- MODAL DONASI -->
+    <!-- MODAL DONASI DENGAN QRIS & WA RESMI -->
     <div id="donateModal" class="modal-overlay">
         <div class="modal-card">
-            <h3 style="margin-bottom: 12px; color: #f59e0b; font-size: 20px;">Dukung Pengembangan Platform</h3>
-            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi sukarela pengembangan fitur pembelajaran.</p>
-            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 20px; border-radius: 14px; margin-bottom: 20px;">
-                <i class="fa-solid fa-qrcode" style="font-size: 56px; color: var(--warning); display: block; margin-bottom: 10px;"></i>
-                <p style="font-size: 13px; font-weight: bold; color: var(--text-main);">[ Barcode QRIS Resmi GanosecTeam ]</p>
+            <h3 style="margin-bottom: 8px; color: #f59e0b; font-size: 20px; font-weight: 800;">Dukung Pengembangan Server</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi server.</p>
+            
+            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 15px; border-radius: 14px; margin-bottom: 16px; display: flex; flex-direction: column; align-items: center;">
+                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 280px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <p style="font-size: 12px; font-weight: 700; color: var(--text-main); margin-top: 10px;">Merchant: CS SmartGen Academy Learning</p>
             </div>
             
             <!-- KODE IKLAN ADSTERRA BARU DI MODAL -->
@@ -215,10 +216,10 @@
                 <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
             </div>
 
-            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ganosec19Team,%20saya%20mendukung%20SmartGen%20Academy." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9;">
+            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; padding: 14px; font-size: 15px;">
                 <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
             </a>
-            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none;" onclick="closeDonateModal()">Tutup</button>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 14px; font-size: 15px;" onclick="closeDonateModal()">Tutup</button>
         </div>
     </div>
 
