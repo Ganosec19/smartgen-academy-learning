@@ -28,32 +28,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; }
         
-        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; z-index: 1; }
         
-        /* Watermark */
-        .container::before {
-            content: "UTBK SNBT\A PREMIUM\A SMARTGEN";
-            white-space: pre;
-            position: absolute;
-            top: 57%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            height: 320px;
-            border: 4px dashed rgba(147, 51, 234, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 19px;
-            font-weight: 800;
-            line-height: 1.4;
-            color: rgba(147, 51, 234, 0.06);
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .app-header { background: linear-gradient(135deg, #7e22ce 0%, #9333ea 100%); color: white; padding: 28px 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
         .app-title { display: flex; align-items: center; gap: 15px; }
         .app-title i { font-size: 32px; background: rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 16px; }
@@ -66,9 +42,33 @@
         h2.section-heading { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
         p.section-desc { color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px; line-height: 1.6; }
 
-        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-bottom: 25px; }
-        .category-card { border: 2px solid var(--border); border-radius: 18px; padding: 22px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; border-left: 6px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(147, 51, 234, 0.15); border-color: var(--primary); }
+        /* GRID MENU SUBTES DENGAN Z-INDEX TERTINGGI SUPAYA MUDAH DIKLIK */
+        .category-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 18px; 
+            margin-bottom: 25px; 
+            position: relative;
+            z-index: 50; 
+        }
+        .category-card { 
+            border: 2px solid var(--border); 
+            border-radius: 18px; 
+            padding: 22px; 
+            text-align: left; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            background: #ffffff; 
+            border-left: 6px solid var(--primary); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+            position: relative;
+            z-index: 51; 
+        }
+        .category-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 25px -5px rgba(147, 51, 234, 0.15); 
+            border-color: var(--primary); 
+        }
         .category-card i { font-size: 24px; margin-bottom: 12px; padding: 10px; border-radius: 12px; display: inline-block; color: var(--primary); background: #f3e8ff; }
         .category-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
         .category-card p { font-size: 12.5px; color: var(--text-muted); }
@@ -100,6 +100,21 @@
         /* Modal Gerbang Pembayaran QRIS & Token */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
         .modal-card { background: #fff; max-width: 440px; width: 100%; border-radius: var(--radius); padding: 30px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
+
+        /* RESPONSIF KHUSUS LAYAR HP / MOBILE */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { border-radius: 16px; }
+            .app-header { padding: 20px; flex-direction: column; text-align: center; gap: 10px; }
+            .app-title { flex-direction: column; gap: 8px; text-align: center; }
+            .section { padding: 20px; }
+            h2.section-heading { font-size: 20px; }
+            .category-grid { grid-template-columns: 1fr; gap: 12px; }
+            .category-card { padding: 18px; }
+            .question-box { font-size: 15.5px; }
+            .option-item { padding: 12px 14px; font-size: 14px; }
+            .modal-card { padding: 20px 15px; margin: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -121,7 +136,7 @@
         <!-- SECTION 1: PILIH SUBTES UTBK -->
         <div id="section-packets" class="section active">
             <h2 class="section-heading">Paket Tryout UTBK SNBT Resmi</h2>
-            <p class="section-desc">Simulasi tes skolastik dan literasi berstandar seleksi nasional perguruan tinggi (Terkunci khusus peserta terverifikasi QRIS):</p>
+            <p class="section-desc">Simulasi tes skolastik dan literasi berstandar seleksi nasional perguruan tinggi (Terkunci khusus peserta terverifikasi QRIS Rp75.000):</p>
             
             <div class="category-grid">
                 <div class="category-card" onclick="checkUtbkAccess('Subtes 1 (Penalaran Umum & Kuantitatif)')">
@@ -133,6 +148,16 @@
                     <i class="fa-solid fa-book-bookmark"></i>
                     <h3>Subtes 2: Literasi Bahasa & Teks</h3>
                     <p>Analisis wacana ilmiah, gagasan utama, & evaluasi teks.</p>
+                </div>
+                <div class="category-card" onclick="checkUtbkAccess('Subtes 3 (Pengetahuan & Pemahaman Umum)')">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <h3>Subtes 3: Pengetahuan & Pemahaman Umum</h3>
+                    <p>Penguasaan kosakata, struktur kalimat, & makna bentukan.</p>
+                </div>
+                <div class="category-card" onclick="checkUtbkAccess('Subtes 4 (Pengetahuan Kuantitatif & Penalaran Matematika)')">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>Subtes 4: Pengetahuan Kuantitatif & Matematika</h3>
+                    <p>Geometri ruang, aljabar lanjut, & analisis data terapan.</p>
                 </div>
             </div>
         </div>
@@ -166,23 +191,22 @@
         <div class="modal-card">
             <h3 style="margin-bottom: 8px; color: var(--primary); font-size: 20px;"><i class="fa-solid fa-lock"></i> Akses UTBK Premium</h3>
             <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
-                Modul tryout ini terkunci. Silakan lakukan donasi/pembayaran via QRIS di bawah ini, lalu konfirmasi ke WhatsApp Admin untuk mendapatkan <b>Token Akses Unik</b>.
+                Modul tryout ini terkunci. Silakan lakukan pembayaran sebesar <b style="color: #e11d48; font-size: 15px;">Rp75.000</b> via QRIS di bawah ini, lalu konfirmasi ke WhatsApp Admin untuk mendapatkan <b>Token Akses</b>.
             </p>
             
-            <!-- Gambar QRIS -->
             <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 14px; border-radius: 14px; margin-bottom: 16px;">
                 <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 240px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 8px;">
-                <p style="font-size: 12px; font-weight: 700; color: var(--text-main);">Merchant: SmartGen Academy Learning</p>
+                <p style="font-size: 13px; font-weight: 800; color: #1e293b; margin-top: 4px;">Nominal Transfer: Rp75.000</p>
+                <p style="font-size: 11.5px; color: var(--text-muted);">Merchant: SmartGen Academy Learning</p>
             </div>
 
-            <!-- Input Token -->
             <div style="margin-bottom: 14px;">
-                <input type="text" id="tokenInput" placeholder="Masukkan Token Akses (Cth: UTBK2026)" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 14px; text-align: center; outline: none; background: #f8fafc;">
+                <input type="text" id="tokenInput" placeholder="Masukkan Token Akses (Cth: 2026/2027)" style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 14px; text-align: center; outline: none; background: #f8fafc;">
             </div>
 
             <button class="btn" onclick="verifyToken()" style="margin-bottom: 10px;"><i class="fa-solid fa-key"></i> Aktifkan & Masuk Ujian</button>
-            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20transfer%20pembayaran%20QRIS%20untuk%20Tryout%20UTBK%20SmartGen%20Academy." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; font-size: 14px; padding: 12px;">
-                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20transfer%20pembayaran%20QRIS%20sebesar%20Rp75.000%20untuk%20Tryout%20UTBK%20SmartGen%20Academy.%20Mohon%20token%20aksesnya." target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; font-size: 14px; padding: 12px;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi Rp75.000 via WhatsApp
             </a>
             <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; font-size: 14px; padding: 12px;" onclick="closeUtbkModal()">Tutup</button>
         </div>
@@ -192,8 +216,11 @@
         © 2026 SmartGen Academy Learning — Developed by Ganosec19Team
     </div>
 
-    <!-- Hubungkan Bank Soal UTBK -->
-    <script src="soal-data-utbk.js"></script>
+    <!-- PENGHUBUNG FILE MODULAR BANK SOAL UTBK -->
+    <script src="utbk-subtes1-pu.js"></script>
+    <script src="utbk-subtes2-literasi.js"></script>
+    <script src="utbk-subtes3-ppu.js"></script>
+    <script src="utbk-subtes4-kuantitatif.js"></script>
 
     <script>
         let currentStudent = localStorage.getItem('smartgen_user') || 'Siswa Tamu';
@@ -209,7 +236,6 @@
             document.getElementById(id).classList.add('active');
         }
 
-        // Sistem Cek Hak Akses Berbayar via Token
         function checkUtbkAccess(subjectName) {
             selectedSubjectCache = subjectName;
             const isUnlocked = localStorage.getItem('utbk_premium_unlocked');
@@ -227,14 +253,13 @@
 
         function verifyToken() {
             const tokenVal = document.getElementById('tokenInput').value.trim();
-            // Token rahasia yang diberikan admin setelah siswa membayar via QRIS
-            if (tokenVal === "UTBK2026") {
+            if (tokenVal === "2026/2027" || tokenVal === "UTBK2026") {
                 localStorage.setItem('utbk_premium_unlocked', 'true');
                 closeUtbkModal();
                 alert("Verifikasi Berhasil! Selamat mengerjakan Tryout UTBK Premium.");
                 startUtbkQuiz(selectedSubjectCache);
             } else {
-                alert("Token Akses salah atau belum aktif. Silakan lakukan pembayaran via QRIS dan konfirmasi ke WhatsApp Admin.");
+                alert("Token Akses salah atau belum aktif. Silakan lakukan pembayaran via QRIS sebesar Rp75.000 dan konfirmasi ke WhatsApp Admin.");
             }
         }
 
@@ -361,7 +386,7 @@
         function showResult() {
             switchSection('section-result');
             document.getElementById('finalScore').innerText = Math.min(score, 100);
-            document.getElementById('resultDesc').innerText = `Luar biasa ${currentStudent}! Evaluasi kemampuan UTBK SNBT kamu telah terekam.`;
+            document.getElementById('resultDesc').innerText = `Luar biasa ${currentStudent}! Evaluasi kemampuan UTBK SNBT kamu terekam.`;
         }
     </script>
 </body>
