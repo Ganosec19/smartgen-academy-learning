@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Game Edukasi & Penalaran - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Pustaka Confetti untuk Tebaran Hadiah Kemenangan -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-hover: #d97706;
+            --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f172a 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow: 0 20px 35px -10px rgba(245, 158, 11, 0.3);
+            --radius: 24px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; }
+        
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; z-index: 1; }
+        
+        .app-header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 25px 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; position: relative; z-index: 2; }
+        .app-title { display: flex; align-items: center; gap: 15px; }
+        .app-title i { font-size: 30px; background: rgba(255, 255, 255, 0.2); padding: 12px; border-radius: 16px; }
+        .app-title h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
+        .app-title p { font-size: 12px; opacity: 0.95; }
+
+        .section { padding: 35px; display: none; position: relative; z-index: 2; }
+        .section.active { display: block; }
+        
+        h2.section-heading { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+        p.section-desc { color: var(--text-muted); font-size: 14.5px; margin-bottom: 25px; line-height: 1.6; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-back { background: #64748b; margin-top: 15px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
+
+        .game-hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        .game-card { border: 2px solid var(--border); border-radius: 18px; padding: 22px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; border-left: 6px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .game-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -5px rgba(245, 158, 11, 0.2); border-color: var(--primary); background: #fffbeb; }
+        .game-card i { font-size: 26px; margin-bottom: 12px; padding: 12px; border-radius: 12px; display: inline-block; color: var(--primary); background: #fef3c7; }
+        .game-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+        .game-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        .game-hud { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 14px 20px; border-radius: 14px; margin-bottom: 25px; border: 1px solid var(--border); font-weight: 700; font-size: 15px; }
+        .hud-badge { display: flex; align-items: center; gap: 8px; color: var(--primary); }
+        .timer-badge { display: flex; align-items: center; gap: 8px; color: var(--danger); }
+
+        .question-image { width: 100%; max-height: 240px; object-fit: cover; border-radius: 14px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .question-box { font-size: 18px; font-weight: 800; margin-bottom: 25px; line-height: 1.6; color: var(--text-main); text-align: center; background: #fffbeb; padding: 25px; border-radius: 16px; border: 2px dashed #fde68a; }
+        
+        .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
+        .game-option-btn { padding: 18px; border: 2px solid var(--border); border-radius: 14px; background: #ffffff; font-size: 16px; cursor: pointer; font-weight: 700; transition: all 0.2s; color: var(--text-main); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .game-option-btn:hover { border-color: var(--primary); background: #fffbeb; transform: translateY(-2px); }
+        .game-option-btn.correct { background: var(--success) !important; color: white !important; border-color: var(--success) !important; }
+        .game-option-btn.wrong { background: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
+
+        .feedback-banner { text-align: center; font-size: 16px; font-weight: 800; padding: 14px; border-radius: 12px; margin-bottom: 20px; display: none; }
+        .feedback-banner.success-msg { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+        .feedback-banner.error-msg { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+
+        .result-card { text-align: center; padding: 15px 0; }
+        .score-circle { width: 120px; height: 120px; background: #fef3c7; color: #d97706; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 800; margin: 0 auto 20px auto; border: 4px solid var(--primary); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2); }
+
+        .ad-container { text-align: center; margin-bottom: 25px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; overflow: hidden; }
+        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+
+        /* FOOTER KECIL DIAM DI BAWAH + TOMBOL DONASI KECIL */
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .footer-donate-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 15px; }
+        .modal-card { background: #fff; max-width: 480px; width: 100%; border-radius: var(--radius); padding: 30px 25px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { border-radius: 16px; }
+            .app-header { padding: 20px; flex-direction: column; text-align: center; gap: 10px; }
+            .app-title { flex-direction: column; gap: 8px; text-align: center; }
+            .section { padding: 20px; }
+            h2.section-heading { font-size: 20px; }
+            .options-grid { grid-template-columns: 1fr; }
+            .question-box { font-size: 16px; padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-gamepad"></i>
+                <div>
+                    <h1>Pusat Game Edukasi Interaktif</h1>
+                    <p id="activeUserBadge">Pemain: Memuat...</p>
+                </div>
+            </div>
+            <!-- Tombol Donasi di Atas & Menu Utama -->
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: #f59e0b; box-shadow: none;" onclick="openDonateModal()">Donasi</button>
+                <button class="btn" style="width: auto; padding: 10px 16px; font-size: 13px; background: rgba(255,255,255,0.2); box-shadow: none;" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-house"></i> Menu Utama
+                </button>
+            </div>
+        </div>
+
+        <!-- SECTION 1: LOBBY -->
+        <div id="section-hub" class="section active">
+            <h2 class="section-heading">Pilih Wahana Game Belajar 🎮</h2>
+            <p class="section-desc">Pilih berbagai jenis permainan edukatif berdurasi 10+ menit lengkap dengan efek suara, gambar ilustrasi visual, dan tebaran hadiah prestasi:</p>
+            
+            <div class="game-hub-grid">
+                <div class="game-card" onclick="launchGame('math', 'Speed Math Blitz')">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>Speed Math Blitz</h3>
+                    <p>25 Soal hitung cepat matematika dasar dan aritmatika berdurasi panjang.</p>
+                </div>
+                <div class="game-card" onclick="launchGame('logic', 'Teka-Teki Asah Otak')">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Teka-Teki Asah Otak</h3>
+                    <p>25 Soal teka-teki logika harian yang menguji penalaran kritis secara mendalam.</p>
+                </div>
+                <div class="game-card" onclick="launchGame('vocab', 'Tebak Sinonim & Kata')">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>Tebak Sinonim & Kata</h3>
+                    <p>25 Soal uji kekayaan kosakata bahasa Indonesia, antonim, dan kata baku.</p>
+                </div>
+                <div class="game-card" onclick="launchGame('series', 'Deret Angka Misteri')">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Deret Angka Misteri</h3>
+                    <p>25 Soal pola urutan angka matematika tingkat lanjut dan penalaran numerik.</p>
+                </div>
+                <div class="game-card" onclick="launchGame('visual', 'Penalaran Visual & Gambar')">
+                    <i class="fa-solid fa-image"></i>
+                    <h3>Penalaran Visual & Gambar</h3>
+                    <p>25 Soal analisis grafik, diagram sains, dan ilustrasi nyata selayaknya RuangGuru.</p>
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <p>- Sponsor / Informasi Iklan -</p>
+                <script>
+                  atOptions = {
+                    'key' : 'fd65e508ca34468b894a035d5c5f3553',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://www.highrevenueformat.com/fd65e508ca34468b894a035d5c5f3553/invoke.js"></script>
+            </div>
+        </div>
+
+        <!-- SECTION 2: ARENA PERMAINAN -->
+        <div id="section-game" class="section">
+            <div class="game-hud">
+                <div class="hud-badge"><i class="fa-solid fa-trophy"></i> Skor: <span id="currentScore">0</span></div>
+                <div class="timer-badge"><i class="fa-solid fa-clock"></i> <span id="timeLeft">30</span> dtk</div>
+            </div>
+
+            <div class="quiz-header" style="justify-content: center; margin-bottom: 15px; display:flex;">
+                <span id="questionCounter" style="background: #fef3c7; color: #d97706; padding: 6px 16px; border-radius: 20px; font-size: 13.5px; font-weight: 700; border: 1px solid #fde68a;">Soal 1 dari 25</span>
+            </div>
+            
+            <div id="imageContainer"></div>
+            <div class="question-box" id="questionText">Memuat soal...</div>
+
+            <div id="feedbackBanner" class="feedback-banner"></div>
+
+            <div class="options-grid" id="optionsGrid"></div>
+            
+            <button class="btn btn-back" onclick="switchSection('section-hub')" style="margin-top: 10px;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pilih Game</button>
+        </div>
+
+        <!-- SECTION 3: SKOR AKHIR -->
+        <div id="section-result" class="section">
+            <div class="result-card">
+                <div class="score-circle" id="finalScore">0</div>
+                <h2 class="section-heading">Permainan Selesai!</h2>
+                <p class="section-desc" id="resultDesc">Hebat! Permainan berhasil diselesaikan.</p>
+                <button class="btn" onclick="switchSection('section-hub')" style="margin-bottom: 12px;"><i class="fa-solid fa-gamepad"></i> Pilih Game Lain</button>
+                <button class="btn btn-back" onclick="window.location.href='index.html'" style="margin-top: 0;"><i class="fa-solid fa-house"></i> Kembali ke Menu Utama</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER DENGAN TOMBOL DONASI KECIL DI BAWAH -->
+    <div class="app-footer-credit">
+        <button class="footer-donate-btn" onclick="openDonateModal()">
+            <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
+        </button>
+        <div>© 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
+    </div>
+
+    <!-- MODAL DONASI -->
+    <div id="donateModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 8px; color: var(--primary); font-size: 20px; font-weight: 800;">Dukung Pengembangan Server</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi server.</p>
+            
+            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 15px; border-radius: 14px; margin-bottom: 16px; display: flex; flex-direction: column; align-items: center;">
+                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 300px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <p style="font-size: 12px; font-weight: 700; color: var(--text-main); margin-top: 10px;">Merchant: CS SmartGen Academy Learning</p>
+            </div>
+
+            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; padding: 14px; font-size: 15px;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            </a>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 14px; font-size: 15px;" onclick="closeDonateModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- PENGHUBUNG KELIMA FILE MODULAR BANK SOAL GAME -->
+    <script src="game-subtes1-math.js"></script>
+    <script src="game-subtes2-logic.js"></script>
+    <script src="game-subtes3-vocab.js"></script>
+    <script src="game-subtes4-series.js"></script>
+    <script src="game-subtes5-visual.js"></script>
+
+    <script>
+        let currentPlayer = localStorage.getItem('smartgen_user') || 'Pemain Tamu';
+        document.getElementById('activeUserBadge').innerText = `Pemain: ${currentPlayer}`;
+
+        let activeQuestions = [];
+        let currentIdx = 0;
+        let score = 0;
+        let timer = null;
+        let timeLeft = 30;
+        let lockAnswer = false;
+        let activeGameName = "";
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            let now = audioCtx.currentTime;
+
+            if (type === 'tick') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                gainNode.gain.setValueAtTime(0.08, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                osc.start(now); osc.stop(now + 0.1);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                gainNode.gain.setValueAtTime(0.2, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc.start(now); osc.stop(now + 0.4);
+                confetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.linearRampToValueAtTime(120, now + 0.3);
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            }
+        }
+
+        function switchSection(id) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function launchGame(gameKey, gameTitle) {
+            activeGameName = gameTitle;
+            const dbMap = {
+                math: window.gameSoalMath || [],
+                logic: window.gameSoalLogic || [],
+                vocab: window.gameSoalVocab || [],
+                series: window.gameSoalSeries || [],
+                visual: window.gameSoalVisual || []
+            };
+            activeQuestions = dbMap[gameKey] || [];
+            if (activeQuestions.length === 0) {
+                alert("File bank soal modular belum lengkap. Pastikan file .js subtes ada di folder yang sama!");
+                return;
+            }
+            currentIdx = 0;
+            score = 0;
+            switchSection('section-game');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            clearInterval(timer);
+            lockAnswer = false;
+            const banner = document.getElementById('feedbackBanner');
+            banner.style.display = 'none';
+
+            if (currentIdx >= activeQuestions.length) {
+                endGame();
+                return;
+            }
+
+            timeLeft = 30;
+            document.getElementById('timeLeft').innerText = timeLeft;
+            document.getElementById('currentScore').innerText = score;
+            document.getElementById('questionCounter').innerText = `Soal ${currentIdx + 1} dari ${activeQuestions.length}`;
+
+            const q = activeQuestions[currentIdx];
+            document.getElementById('questionText').innerText = q.q;
+
+            const imgContainer = document.getElementById('imageContainer');
+            if (q.image) {
+                imgContainer.innerHTML = `<img src="${q.image}" alt="Ilustrasi Soal" class="question-image">`;
+            } else {
+                imgContainer.innerHTML = "";
+            }
+
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'game-option-btn';
+                btn.innerText = `${String.fromCharCode(65 + idx)}. ${opt}`;
+                btn.onclick = () => selectAnswer(idx, btn);
+                grid.appendChild(btn);
+            });
+
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timeLeft').innerText = timeLeft;
+                if (timeLeft <= 5) { playSound('tick'); }
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(selectedIdx, btnElement) {
+            if (lockAnswer) return;
+            lockAnswer = true;
+            clearInterval(timer);
+
+            const q = activeQuestions[currentIdx];
+            const allBtns = document.querySelectorAll('.game-option-btn');
+            const banner = document.getElementById('feedbackBanner');
+
+            if (selectedIdx === q.correct) {
+                btnElement.classList.add('correct');
+                score += (10 + (timeLeft * 2));
+                document.getElementById('currentScore').innerText = score;
+                playSound('correct');
+                banner.className = "feedback-banner success-msg";
+                banner.innerHTML = `<i class="fa-solid fa-circle-check"></i> Luar biasa! Jawaban Benar! 🎉`;
+                banner.style.display = "block";
+            } else {
+                btnElement.classList.add('wrong');
+                allBtns[q.correct].classList.add('correct');
+                playSound('wrong');
+                banner.className = "feedback-banner error-msg";
+                banner.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Jangan Menyerah, Ayo Tetap Semangat! 💪`;
+                banner.style.display = "block";
+            }
+
+            setTimeout(() => {
+                currentIdx++;
+                loadQuestion();
+            }, 1800);
+        }
+
+        function handleTimeOut() {
+            if (lockAnswer) return;
+            lockAnswer = true;
+            const q = activeQuestions[currentIdx];
+            const allBtns = document.querySelectorAll('.game-option-btn');
+            allBtns[q.correct].classList.add('correct');
+            playSound('wrong');
+            const banner = document.getElementById('feedbackBanner');
+            banner.className = "feedback-banner error-msg";
+            banner.innerHTML = `<i class="fa-solid fa-clock"></i> Waktu Habis! Jangan Menyerah, Ayo Tetap Semangat!`;
+            banner.style.display = "block";
+
+            setTimeout(() => {
+                currentIdx++;
+                loadQuestion();
+            }, 1800);
+        }
+
+        function endGame() {
+            switchSection('section-result');
+            document.getElementById('finalScore').innerText = score;
+            document.getElementById('resultDesc').innerText = `Luar biasa ${currentPlayer}! Kamu menyelesaikan permainan [${activeGameName}] dengan total perolehan skor ${score}.`;
+            confetti({ particleCount: 180, spread: 120, origin: { y: 0.5 } });
+        }
+
+        function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
+        function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
