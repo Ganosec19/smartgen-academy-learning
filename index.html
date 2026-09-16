@@ -25,7 +25,6 @@
         
         .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; position: relative; }
         
-        /* TANDA AIR / WATERMARK BENTUK BULAT DI TENGAH */
         .container::before {
             content: "SMARTGEN\A ACADEMY\A LEARNING";
             white-space: pre;
@@ -71,7 +70,6 @@
         .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
         .btn-back { background: #64748b; margin-top: 12px; box-shadow: 0 6px 20px rgba(100, 116, 139, 0.3); }
 
-        /* GRID UTAMA 4 PILAR MENU */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 25px; }
         .menu-card { border: 2px solid var(--border); border-radius: 16px; padding: 25px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; position: relative; overflow: hidden; }
         .menu-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1); border-color: var(--primary); }
@@ -79,27 +77,23 @@
         .menu-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
         .menu-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-        /* WARNA KHUSUS TIAP KOTAK PILAR */
         .card-ujian { border-left: 6px solid #3b82f6; }
         .card-ujian i { color: #3b82f6; background: #eff6ff; }
-
         .card-tka { border-left: 6px solid #111827; }
         .card-tka i { color: #111827; background: #f3f4f6; }
-
         .card-utbk { border-left: 6px solid #9333ea; }
         .card-utbk i { color: #9333ea; background: #f3e8ff; }
-
         .card-game { border-left: 6px solid #f59e0b; }
         .card-game i { color: #f59e0b; background: #fef3c7; }
 
-        /* KOTAK RUANG IKLAN / ADSTERRA */
         .ad-container { text-align: center; margin-bottom: 25px; padding: 14px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 14px; overflow: hidden; }
         .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
-        /* FOOTER HAK CIPTA */
-        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.7); font-weight: 600; letter-spacing: 0.5px; }
+        /* FOOTER KECIL DIAM DI BAWAH + TOMBOL DONASI KECIL */
+        .app-footer-credit { text-align: center; padding: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .footer-donate-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
 
-        /* MODAL (DIPERBESAR DI HP) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 15px; }
         .modal-card { background: #fff; max-width: 480px; width: 100%; border-radius: var(--radius); padding: 30px 25px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
     </style>
@@ -115,10 +109,10 @@
                     <p>Portal Resmi Ujian Terintegrasi Nasional</p>
                 </div>
             </div>
+            <!-- Tombol Donasi di Atas (Sudah Sesuai Permintaan) -->
             <button class="btn" style="width: auto; padding: 10px 18px; font-size: 13px; background: #f59e0b;" onclick="openDonateModal()">Donasi</button>
         </div>
 
-        <!-- SECTION 0: LANDING PAGE -->
         <div id="section-landing" class="section active">
             <div style="margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 15px;">
                 <h3 style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">
@@ -134,14 +128,8 @@
             </div>
             
             <button class="btn" onclick="goToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk ke Portal Utama</button>
-            
-            <!-- TOMBOL DONASI DI BAWAH PORTAL MASUK -->
-            <button class="btn" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); margin-top: 12px;" onclick="openDonateModal()">
-                <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi Pengembang (QRIS)
-            </button>
         </div>
 
-        <!-- SECTION 1: LOGIN -->
         <div id="section-login" class="section">
             <h2 class="section-heading">Identitas Siswa</h2>
             <p class="section-desc">Masukkan nama lengkap dan nomor WhatsApp aktif Anda untuk mencatat riwayat sesi ujian.</p>
@@ -157,34 +145,26 @@
             <button class="btn btn-back" onclick="switchSection('section-landing')">Kembali</button>
         </div>
 
-        <!-- SECTION 2: DASHBOARD UTAMA (4 PILAR MENU) -->
         <div id="section-dashboard" class="section">
             <h2 class="section-heading">Pilih Modul Pembelajaran</h2>
             <p class="section-desc">Silakan pilih salah satu jalur ujian atau aktivitas akademik di bawah ini:</p>
             
             <div class="dashboard-grid">
-                <!-- PILAR 1: Ujian Semester Kelas 1-12 -->
                 <div class="menu-card card-ujian" onclick="window.location.href='ujian-semester.html'">
                     <i class="fa-solid fa-file-lines"></i>
                     <h3>Ujian Semester (Kelas 1-12)</h3>
                     <p>Modul soal lengkap reguler IPA, IPS, & mata pelajaran wajib per jenjang.</p>
                 </div>
-
-                <!-- PILAR 2: TKA Nasional Kelas 6, 9, 12 -->
                 <div class="menu-card card-tka" onclick="window.location.href='tka.html'">
                     <i class="fa-solid fa-award"></i>
                     <h3>Ujian TKA (Kelas 6, 9, 12)</h3>
                     <p>Simulasi Tes Kemampuan Akademik berstandar resmi Kemendikdasmen.</p>
                 </div>
-
-                <!-- PILAR 3: Tryout UTBK SNBT -->
                 <div class="menu-card card-utbk" onclick="window.location.href='utbk.html'">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h3>Tryout UTBK SNBT</h3>
                     <p>Simulasi ujian masuk Perguruan Tinggi Negeri premium berbayar.</p>
                 </div>
-
-                <!-- PILAR 4: Game Edukasi & Penalaran -->
                 <div class="menu-card card-game" onclick="window.location.href='game-edukasi.html'">
                     <i class="fa-solid fa-gamepad"></i>
                     <h3>Game Edukasi & Penalaran</h3>
@@ -192,7 +172,6 @@
                 </div>
             </div>
 
-            <!-- SLOT IKLAN / ADSTERRA BANNER -->
             <div class="ad-container">
                 <p>- Sponsor / Informasi Iklan -</p>
                 <script>
@@ -206,31 +185,28 @@
                 </script>
                 <script src="https://www.highrevenueformat.com/fd65e508ca34468b894a035d5c5f3553/invoke.js"></script>
             </div>
-
-            <button class="btn" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);" onclick="openDonateModal()">
-                <i class="fa-solid fa-hand-holding-dollar"></i> Dukung & Donasi Pengembang (QRIS)
-            </button>
         </div>
     </div>
 
-    <!-- HAK CIPTA / FOOTER -->
+    <!-- FOOTER DENGAN LOGO DONASI KECIL DI BAWAH -->
     <div class="app-footer-credit">
-        © 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik
+        <button class="footer-donate-btn" onclick="openDonateModal()">
+            <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
+        </button>
+        <div>© 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
     </div>
 
-    <!-- MODAL DONASI (DENGAN GAMBAR QRIS ASLI YANG DIPERBESAR) -->
+    <!-- MODAL DONASI -->
     <div id="donateModal" class="modal-overlay">
         <div class="modal-card">
-            <h3 style="margin-bottom: 8px; color: var(--primary); font-size: 20px; font-weight: 800;">Dukung Pengembangan Platform</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">Scan QRIS di bawah ini menggunakan GoPay, DANA, OVO, BCA, atau e-wallet lainnya untuk donasi atau aktivasi Tryout UTBK.</p>
+            <h3 style="margin-bottom: 8px; color: var(--primary); font-size: 20px; font-weight: 800;">Dukung Pengembangan Server</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">Scan QRIS di bawah ini untuk donasi server atau aktivasi Tryout UTBK.</p>
             
-            <!-- KOTAK GAMBAR QRIS -->
             <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 15px; border-radius: 14px; margin-bottom: 16px; display: flex; flex-direction: column; align-items: center;">
                 <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 300px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                 <p style="font-size: 12px; font-weight: 700; color: var(--text-main); margin-top: 10px;">Merchant: CS SmartGen Academy Learning</p>
             </div>
 
-            <!-- SLOT IKLAN KEDUA DI DALAM MODAL DONASI -->
             <div style="text-align: center; margin-bottom: 16px; padding: 10px; background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; overflow: hidden;">
                 <script>
                   atOptions = {
@@ -244,34 +220,28 @@
                 <script src="https://www.highrevenueformat.com/fd65e508ca34468b894a035d5c5f3553/invoke.js"></script>
             </div>
 
-            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20untuk%20SmartGen%20Academy.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; padding: 14px; font-size: 15px;">
+            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 10px; background: #0ea5e9; padding: 14px; font-size: 15px;">
                 <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
             </a>
             <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 14px; font-size: 15px;" onclick="closeDonateModal()">Tutup</button>
         </div>
     </div>
 
-    <!-- SKRIP UTAMA -->
     <script>
         function goToLogin() { switchSection('section-login'); }
-
         function handleLogin() {
             const name = document.getElementById('inputName').value.trim();
             const contact = document.getElementById('inputContact').value.trim();
             if(!name) { alert('Silakan masukkan nama lengkap Anda!'); return; }
-            if(!contact || contact.length < 8) { alert('Masukkan nomor WhatsApp yang valid (hanya angka, minimal 8 digit)!'); return; }
-            
+            if(!contact || contact.length < 8) { alert('Masukkan nomor WhatsApp yang valid!'); return; }
             localStorage.setItem('smartgen_user', name);
             localStorage.setItem('smartgen_contact', contact);
-
             switchSection('section-dashboard');
         }
-
         function switchSection(id) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
-
         function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
         function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
     </script>
