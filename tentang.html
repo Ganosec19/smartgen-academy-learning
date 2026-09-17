@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami & Tim Pengembang - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #172554 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --success: #059669;
+            --shadow-glow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 30px 15px; }
+
+        .container { max-width: 960px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow-glow); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
+
+        /* HEADER EKSKLUSIF */
+        .app-header { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #1e40af 100%); color: white; padding: 35px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; overflow: hidden; }
+        .app-header::after { content: ""; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; background: rgba(255, 255, 255, 0.08); border-radius: 50%; pointer-events: none; }
+        
+        .app-title { display: flex; align-items: center; gap: 18px; z-index: 2; }
+        .app-title i { font-size: 38px; background: rgba(255, 255, 255, 0.18); padding: 14px; border-radius: 18px; backdrop-filter: blur(5px); }
+        .app-title h1 { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+        .app-title p { font-size: 13px; opacity: 0.9; margin-top: 3px; font-weight: 500; }
+
+        .header-actions { display: flex; align-items: center; gap: 10px; z-index: 2; }
+
+        .content-section { padding: 40px; position: relative; z-index: 2; }
+
+        /* SUBJUDUL & DESKRIPSI */
+        .section-heading { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .section-heading i { color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 12px; font-size: 18px; }
+        .section-desc { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; line-height: 1.8; font-weight: 500; }
+
+        /* KARTU VISI & MISI (GRID) */
+        .info-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 35px; }
+        .info-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; border-radius: 20px; padding: 28px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.04); transition: all 0.3s ease; border-top: 5px solid var(--primary); }
+        .info-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.12); border-color: var(--primary); }
+        .info-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .info-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; font-weight: 500; }
+
+        /* SATU KOTAK BESAR UNTUK SEMUA TIM PENGEMBANG */
+        .single-team-container { background: #ffffff; border: 2px solid #e2e8f0; border-radius: 22px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 35px; position: relative; overflow: hidden; }
+        .single-team-container::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+        
+        .team-row-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f1f5f9; gap: 15px; flex-wrap: wrap; }
+        .team-row-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .team-row-item:first-child { padding-top: 0; }
+
+        .team-member-info { display: flex; align-items: center; gap: 16px; }
+        .team-member-icon { width: 44px; height: 44px; background: var(--primary-light); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; border: 1px solid #bfdbfe; }
+        .team-member-text h4 { font-size: 15.5px; font-weight: 800; color: var(--text-main); line-height: 1.4; }
+        .team-member-text p { font-size: 12.5px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+
+        .team-role-badge { background: #f8fafc; color: var(--primary); padding: 6px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; }
+
+        /* TUJUAN PENGEMBANGAN (LIST) */
+        .mission-list { list-style: none; margin-bottom: 35px; display: flex; flex-direction: column; gap: 14px; }
+        .mission-item { display: flex; align-items: flex-start; gap: 16px; background: #f8fafc; padding: 18px 22px; border-radius: 16px; border: 1px solid #e2e8f0; font-size: 15px; font-weight: 600; line-height: 1.6; color: var(--text-main); transition: all 0.2s; }
+        .mission-item:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .mission-item i { color: var(--success); font-size: 20px; margin-top: 1px; flex-shrink: 0; background: #d1fae5; padding: 6px; border-radius: 10px; }
+
+        /* TOMBOL AKSI UTAMA */
+        .btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25); text-decoration: none; }
+        .btn-action:hover { background: #1d4ed8; transform: translateY(-2px); }
+        
+        .btn-donate-top { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35); }
+        .btn-donate-top:hover { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
+
+        /* RUANG IKLAN ADSTERRA */
+        .ad-container { text-align: center; margin: 30px 0; padding: 16px; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px; overflow: hidden; }
+        .ad-container p { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; }
+
+        /* FOOTER */
+        .app-footer-credit { text-align: center; padding: 25px; font-size: 13px; color: rgba(255, 255, 255, 0.75); font-weight: 600; letter-spacing: 0.5px; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        .modal-card { background: #fff; max-width: 440px; width: 100%; border-radius: var(--radius); padding: 35px 30px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div>
+                    <h1>SmartGen Academy Learning</h1>
+                    <p>Portal Resmi Visi, Misi & Direktori Tim Pengembang</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-action" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); box-shadow: none;" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-house"></i> Menu Utama
+                </button>
+                <button class="btn-action btn-donate-top" onclick="openDonateModal()">
+                    <i class="fa-solid fa-hand-holding-dollar"></i> Donasi
+                </button>
+            </div>
+        </div>
+
+        <!-- KONTEN UTAMA -->
+        <div class="content-section">
+            
+            <h2 class="section-heading"><i class="fa-solid fa-compass"></i> Pengenalan Platform</h2>
+            <p class="section-desc">
+                <strong>SmartGen Academy Learning</strong> adalah platform pendidikan digital mutakhir yang dirancang secara profesional untuk mendampingi peserta didik, pendidik, dan publik dalam mengasah kompetensi akademik. Mengintegrasikan bank soal terstruktur dari Kelas 1 SD hingga 12 SMA/SMK, simulasi Tes Kemampuan Akademik (TKA), Tryout UTBK SNBT berbasis standar nasional, serta wahana edukasi interaktif berbasis gamifikasi.
+            </p>
+
+            <!-- VISI & MISI -->
+            <div class="info-card-grid">
+                <div class="info-card" style="border-top-color: #2563eb;">
+                    <h3><i class="fa-solid fa-eye" style="color: #2563eb;"></i> Visi Utama</h3>
+                    <p>Menjadi mercusuar ekosistem digital pembelajaran interaktif terdepan yang melahirkan generasi cerdas, kritis, berkarakter unggul, dan siap memenangi tantangan global berbasis teknologi.</p>
+                </div>
+                <div class="info-card" style="border-top-color: #059669;">
+                    <h3><i class="fa-solid fa-rocket" style="color: #059669;"></i> Misi Strategis</h3>
+                    <p>Menghadirkan bank soal berkualitas komprehensif, menyediakan sistem evaluasi ujian yang transparan dan akurat, serta mentransformasikan proses belajar menjadi pengalaman yang mengasyikkan.</p>
+                </div>
+            </div>
+
+            <!-- DIREKTORI TIM PENGEMBANG (DALAM 1 KOTAK BESAR) -->
+            <h2 class="section-heading"><i class="fa-solid fa-id-badge"></i> Tim Penyusun & Pengembang Profesional</h2>
+            <p class="section-desc">Pembangunan platform berstandar tinggi ini digerakkan oleh kolaborasi talenta terbaik di bidang rekayasa sistem, kurikulum, dan teknologi pembelajaran:</p>
+            
+            <div class="single-team-container">
+                <!-- 1 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="team-member-text">
+                            <h4>Faisal Farid, S.Kom., CEH</h4>
+                            <p>System Architecture, Visual & Responsive Design Specialist</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">System & Interface</div>
+                </div>
+                <!-- 2 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <div class="team-member-text">
+                            <h4>Dea Ananda Puspitasari, M.Kom.</h4>
+                            <p>Penyusun Soal-Soal Lintas Jenjang & Kurikulum Pembelajaran</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Curriculum & Academic</div>
+                </div>
+                <!-- 3 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="team-member-text">
+                            <h4>Natasya Sari Anita, M.T.</h4>
+                            <p>Penyusun Strategis Kemitraan, Sponsor & Monetisasi Sistem</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Strategy & Monetization</div>
+                </div>
+                <!-- 4 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-database"></i></div>
+                        <div class="team-member-text">
+                            <h4>Ahmad Zaky, S.Kom., M.T.</h4>
+                            <p>Database Administrator & Keamanan Sistem Ujian Online</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Database & Security</div>
+                </div>
+                <!-- 5 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <div class="team-member-text">
+                            <h4>Siti Rahmawati, M.Pd.</h4>
+                            <p>Pengembang Logika Game Edukasi & Aspek Pedagogik Siswa</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Gamification & Pedagogy</div>
+                </div>
+                <!-- 6 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="team-member-text">
+                            <h4>Rizky Pratama, M.Cs.</h4>
+                            <p>Analisis Performa Sistem & Optimasi Kecepatan Akses Web</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Performance Optimization</div>
+                </div>
+                <!-- 7 -->
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="team-member-text">
+                            <h4>Dewi Lestari, S.I.Kom., M.I.Kom.</h4>
+                            <p>Publikasi Digital, Desain Konten Kreatif & Hubungan Masyarakat</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Publication & PR</div>
+                </div>
+            </div>
+
+            <!-- TUJUAN UTAMA -->
+            <h2 class="section-heading"><i class="fa-solid fa-bullseye"></i> Tujuan Strategis Platform</h2>
+            <ul class="mission-list">
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Memberikan akses terbuka terhadap fasilitas bank soal dan evaluasi mandiri berstandar tinggi tanpa sekat ruang dan waktu.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Mengantar peserta didik menguasai materi Ujian Semester, Tes Kemampuan Akademik (TKA), dan sukses menembus PTN impian melalui Tryout UTBK.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Menstimulasi ketajaman nalar, logika, dan pemecahan masalah melalui zona game edukasi penalaran interaktif.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Menjadi pelopor infrastruktur teknologi pendidikan digital yang inklusif, handal, dan berdaya guna bagi kemajuan bangsa.</span>
+                </li>
+            </ul>
+
+            <!-- SLOT IKLAN ADSTERRA -->
+            <div class="ad-container">
+                <p>- Sponsor / Informasi Iklan -</p>
+                <script>
+                  atOptions = {
+                    'key' : '070d794b06c5e2b76e2ff7331f3aebe6',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
+            </div>
+
+            <button class="btn-action" onclick="window.location.href='index.html'" style="width: 100%; padding: 18px; font-size: 16px; margin-top: 15px;">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Utama
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="app-footer-credit">
+        © 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam
+    </div>
+
+    <!-- MODAL DONASI -->
+    <div id="donateModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin-bottom: 8px; color: var(--accent); font-size: 20px; font-weight: 800;">Dukung Pengembangan Server</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">Scan QRIS di bawah ini untuk kontribusi server pembelajaran.</p>
+            
+            <div style="background: #f8fafc; border: 2px dashed #cbd5e1; padding: 15px; border-radius: 16px; margin-bottom: 18px; display: flex; flex-direction: column; align-items: center;">
+                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 260px; height: auto; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+                <p style="font-size: 12.5px; font-weight: 700; color: var(--text-main); margin-top: 10px;">Merchant: CS SmartGen Academy Learning</p>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 18px; padding: 10px; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; overflow: hidden;">
+                <script>
+                  atOptions = {
+                    'key' : '070d794b06c5e2b76e2ff7331f3aebe6',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
+            </div>
+
+            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn-action" style="text-decoration: none; margin-bottom: 12px; background: #0ea5e9; padding: 15px; font-size: 15px; width: 100%;">
+                <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
+            </a>
+            <button class="btn-action" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 15px; font-size: 15px; width: 100%;" onclick="closeDonateModal()">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
+        function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
