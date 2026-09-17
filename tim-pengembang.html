@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim Pengembang & Server - SmartGen Academy Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #172554 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --success: #059669;
+            --shadow-glow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+            --radius: 24px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 30px 15px; }
+        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow-glow); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.4); overflow: hidden; position: relative; }
+        .app-header { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #1e40af 100%); color: white; padding: 35px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .app-title { display: flex; align-items: center; gap: 18px; }
+        .app-title i { font-size: 38px; background: rgba(255, 255, 255, 0.18); padding: 14px; border-radius: 18px; }
+        .app-title h1 { font-size: 22px; font-weight: 800; }
+        .app-title p { font-size: 13px; opacity: 0.9; margin-top: 3px; }
+        .content-section { padding: 40px; }
+        .section-heading { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .section-heading i { color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 12px; font-size: 18px; }
+        .section-desc { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; line-height: 1.8; font-weight: 500; }
+        .collab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 35px; }
+        .collab-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; border-radius: 20px; padding: 28px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.04); border-top: 5px solid var(--primary); }
+        .collab-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .collab-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; font-weight: 500; }
+        .single-team-container { background: #ffffff; border: 2px solid #e2e8f0; border-radius: 22px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 35px; position: relative; overflow: hidden; }
+        .single-team-container::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+        .team-row-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f1f5f9; gap: 15px; flex-wrap: wrap; }
+        .team-row-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .team-member-info { display: flex; align-items: center; gap: 16px; }
+        .team-member-icon { width: 44px; height: 44px; background: var(--primary-light); color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; border: 1px solid #bfdbfe; }
+        .team-member-text h4 { font-size: 15.5px; font-weight: 800; color: var(--text-main); }
+        .team-member-text p { font-size: 12.5px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+        .team-role-badge { background: #f8fafc; color: var(--primary); padding: 6px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; border: 1px solid #e2e8f0; }
+        .btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 25px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; width: 100%; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25); }
+        .btn-action:hover { background: #1d4ed8; }
+        .app-footer-credit { text-align: center; padding: 25px; font-size: 13px; color: rgba(255, 255, 255, 0.75); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-users-gear"></i>
+                <div>
+                    <h1>Tim Pengembang & Server</h1>
+                    <p>Direktori Profesional & Divisi Keandalan Sistem</p>
+                </div>
+            </div>
+            <button class="btn-action" style="width: auto; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); box-shadow: none;" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-house"></i> Menu Utama
+            </button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-heading"><i class="fa-solid fa-server"></i> Divisi Struktur & Ketahanan Server</h2>
+            <p class="section-desc">Pilar utama operasional sistem dirancang melalui keandalan penataan struktur internal dan mitigasi server:</p>
+            
+            <div class="collab-grid">
+                <div class="collab-card" style="border-top-color: #2563eb;">
+                    <h3><i class="fa-solid fa-sitemap" style="color: #2563eb;"></i> Arsitektur & Struktur Sistem</h3>
+                    <p>Divisi khusus yang bertanggung jawab penuh dalam merancang kerangka navigasi, efisiensi modul kode, serta kerapian tata letak antarmuka agar nyaman diakses oleh seluruh pengguna.</p>
+                </div>
+                <div class="collab-card" style="border-top-color: #059669;">
+                    <h3><i class="fa-solid fa-shield-cat" style="color: #059669;"></i> Ketahanan & Mitigasi Server</h3>
+                    <p>Tim pengawas harian yang siaga menjaga stabilitas akses, mengamankan lalu lintas data ujian, serta mengoptimalkan performa server agar tetap tangguh di tengah lonjakan trafik tinggi.</p>
+                </div>
+            </div>
+
+            <h2 class="section-heading"><i class="fa-solid fa-id-badge"></i> Direktori Tim Penyusun Profesional</h2>
+            <p class="section-desc">Didukung oleh kolaborasi talenta-talenta luar biasa di balik layar:</p>
+            
+            <div class="single-team-container">
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="team-member-text">
+                            <h4>Faisal Farid, S.Kom., CEH (Aiden Vance)</h4>
+                            <p>Lead System Architect & Core Developer</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">System & Interface</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <div class="team-member-text">
+                            <h4>Dea Ananda Puspitasari, M.Kom. (Valerie Vantasia)</h4>
+                            <p>Curriculum Director & Academic Quality Lead</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Curriculum & Academic</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="team-member-text">
+                            <h4>Natasya Sari Anita, M.T. (Elysia Morningstar)</h4>
+                            <p>Strategic Partnership & Monetization Officer</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Strategy & Monetization</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-database"></i></div>
+                        <div class="team-member-text">
+                            <h4>Ahmad Zaky, S.Kom., M.T. (Dmitri Kaelen)</h4>
+                            <p>Database Security & Cloud Infrastructure Specialist</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Database & Security</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <div class="team-member-text">
+                            <h4>Siti Rahmawati, M.Pd. (Zephyrine Ray)</h4>
+                            <p>Gamification Logic & Pedagogical Engineer</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Gamification & Pedagogy</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="team-member-text">
+                            <h4>Rizky Pratama, M.Cs. (Jaxson Thorne)</h4>
+                            <p>Performance Optimization & Global Load Tester</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Performance Optimization</div>
+                </div>
+                <div class="team-row-item">
+                    <div class="team-member-info">
+                        <div class="team-member-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="team-member-text">
+                            <h4>Dewi Lestari, S.I.Kom., M.I.Kom. (Cassia Vance)</h4>
+                            <p>Digital Publication & Creative PR Director</p>
+                        </div>
+                    </div>
+                    <div class="team-role-badge">Publication & PR</div>
+                </div>
+            </div>
+
+            <button class="btn-action" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Utama
+            </button>
+        </div>
+    </div>
+    <div class="app-footer-credit">© 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
+</body>
+</html>

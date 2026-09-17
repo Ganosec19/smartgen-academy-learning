@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Kami - SmartGen Academy Learning</title>
+    <title>Visi, Misi & Tujuan - SmartGen Academy Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -31,11 +31,13 @@
         .content-section { padding: 40px; }
         .section-heading { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
         .section-heading i { color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 12px; font-size: 18px; }
-        .section-desc { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; line-height: 1.8; font-weight: 500; }
-        .story-box { background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%); border: 2px solid #bfdbfe; border-radius: 20px; padding: 30px; margin-bottom: 35px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.04); }
-        .story-box h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .story-box p { font-size: 14.5px; color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; text-align: justify; font-weight: 500; }
-        .story-box p:last-child { margin-bottom: 0; }
+        .info-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 35px; }
+        .info-card { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 2px solid #e2e8f0; border-radius: 20px; padding: 28px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.04); border-top: 5px solid var(--primary); }
+        .info-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .info-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; font-weight: 500; }
+        .mission-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+        .mission-item { display: flex; align-items: flex-start; gap: 16px; background: #f8fafc; padding: 18px 22px; border-radius: 16px; border: 1px solid #e2e8f0; font-size: 15px; font-weight: 600; line-height: 1.6; color: var(--text-main); }
+        .mission-item i { color: var(--success); font-size: 20px; margin-top: 1px; flex-shrink: 0; background: #d1fae5; padding: 6px; border-radius: 10px; }
         .btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 25px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; width: 100%; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25); }
         .btn-action:hover { background: #1d4ed8; }
         .app-footer-credit { text-align: center; padding: 25px; font-size: 13px; color: rgba(255, 255, 255, 0.75); font-weight: 600; }
@@ -45,10 +47,10 @@
     <div class="container">
         <div class="app-header">
             <div class="app-title">
-                <i class="fa-solid fa-circle-info"></i>
+                <i class="fa-solid fa-bullseye"></i>
                 <div>
-                    <h1>Tentang Kami</h1>
-                    <p>Profil & Latar Belakang SmartGen Academy Learning</p>
+                    <h1>Visi Misi & Tujuan</h1>
+                    <p>Arah Strategis Pengembangan SmartGen Academy Learning</p>
                 </div>
             </div>
             <button class="btn-action" style="width: auto; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); box-shadow: none;" onclick="window.location.href='index.html'">
@@ -56,23 +58,36 @@
             </button>
         </div>
         <div class="content-section">
-            <h2 class="section-heading"><i class="fa-solid fa-compass"></i> Pengenalan Platform</h2>
-            <p class="section-desc">
-                <strong>SmartGen Academy Learning</strong> adalah platform pendidikan digital mutakhir yang dirancang secara profesional untuk mendampingi peserta didik, pendidik, dan publik dalam mengasah kompetensi akademik. Mengintegrasikan bank soal terstruktur dari Kelas 1 SD hingga 12 SMA/SMK, simulasi Tes Kemampuan Akademik (TKA), Tryout UTBK SNBT berbasis standar nasional, serta wahana edukasi interaktif berbasis gamifikasi.
-            </p>
-
-            <div class="story-box">
-                <h3><i class="fa-solid fa-book-open-reader"></i> Perjalanan, Dedikasi, & Semangat Kebersamaan Tim</h3>
-                <p>
-                    Berdirinya <strong>SmartGen Academy Learning</strong> bukan sekadar tentang membangun barisan kode program atau merancang tampilan antarmuka semata. Platform ini lahir dari sebuah visi besar dan kepedulian mendalam terhadap masa depan pendidikan nasional, yang digerakkan oleh semangat kebersamaan dan kerja keras tanpa kenal lelah dari para inisiator dan pengembang.
-                </p>
-                <p>
-                    Di balik setiap modul ujian, setiap baris tata letak situs, dan setiap fitur interaktif yang dapat dinikmati hari ini, tersimpan proses diskusi panjang, uji coba sistem berulang kali, serta curahan tenaga dan pikiran lintas disiplin ilmu. Berkat kekompakan tim yang solid di bawah naungan <em>Ganosec19Team-PuskemSmartGenTeam</em>, berbagai tantangan teknis maupun akademis berhasil diselesaikan dengan penuh ketekunan.
-                </p>
-                <p>
-                    Dedikasi yang diberikan bukan sekadar menunaikan proyek digital, melainkan bentuk pengabdian nyata untuk menghadirkan sarana belajar yang inklusif, transparan, dan bermanfaat luas bagi anak-anak bangsa. Kami percaya bahwa ketulusan niat, kerja keras kolaboratif, dan komitmen tinggi akan selalu membuahkan karya terbaik bagi kemajuan dunia pendidikan Indonesia.
-                </p>
+            <div class="info-card-grid">
+                <div class="info-card" style="border-top-color: #2563eb;">
+                    <h3><i class="fa-solid fa-eye" style="color: #2563eb;"></i> Visi Utama</h3>
+                    <p>Menjadi mercusuar ekosistem digital pembelajaran interaktif terdepan yang melahirkan generasi cerdas, kritis, berkarakter unggul, dan siap memenangi tantangan global berbasis teknologi.</p>
+                </div>
+                <div class="info-card" style="border-top-color: #059669;">
+                    <h3><i class="fa-solid fa-rocket" style="color: #059669;"></i> Misi Strategis</h3>
+                    <p>Menghadirkan bank soal berkualitas komprehensif, menyediakan sistem evaluasi ujian yang transparan dan akurat, serta mentransformasikan proses belajar menjadi pengalaman yang mengasyikkan.</p>
+                </div>
             </div>
+
+            <h2 class="section-heading"><i class="fa-solid fa-list-check"></i> Tujuan Strategis Platform</h2>
+            <ul class="mission-list">
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Memberikan akses terbuka terhadap fasilitas bank soal dan evaluasi mandiri berstandar tinggi tanpa sekat ruang dan waktu.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Mengantar peserta didik menguasai materi Ujian Semester, Tes Kemampuan Akademik (TKA), dan sukses menembus PTN impian melalui Tryout UTBK.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Menstimulasi ketajaman nalar, logika, dan pemecahan masalah melalui zona game edukasi penalaran interaktif.</span>
+                </li>
+                <li class="mission-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Menjadi pelopor infrastruktur teknologi pendidikan digital yang inklusif, handal, dan berdaya guna bagi kemajuan bangsa.</span>
+                </li>
+            </ul>
 
             <button class="btn-action" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Utama
