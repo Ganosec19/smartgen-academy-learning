@@ -11,80 +11,80 @@
             --primary: #4f46e5;
             --primary-hover: #4338ca;
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
-            --card-bg: rgba(255, 255, 255, 0.96);
+            --card-bg: rgba(255, 255, 255, 0.97);
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
             --success: #10b981;
             --warning: #f59e0b;
-            --shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3);
-            --radius: 20px;
+            --shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.25);
+            --radius: 16px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 15px; }
         
-        .container { max-width: 900px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; position: relative; }
+        .container { max-width: 850px; width: 100%; margin: auto; background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; position: relative; }
         
-        .app-header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: white; padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; position: relative; z-index: 2; }
-        .app-title { display: flex; align-items: center; gap: 12px; }
-        .app-title i { font-size: 28px; background: rgba(255, 255, 255, 0.15); padding: 10px; border-radius: 12px; }
-        .app-title h1 { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
-        .app-title p { font-size: 11.5px; opacity: 0.85; }
+        .app-header { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; position: relative; z-index: 2; }
+        .app-title { display: flex; align-items: center; gap: 10px; }
+        .app-title i { font-size: 24px; background: rgba(255, 255, 255, 0.15); padding: 8px; border-radius: 10px; }
+        .app-title h1 { font-size: 16px; font-weight: 800; letter-spacing: 0.3px; }
+        .app-title p { font-size: 11px; opacity: 0.85; }
 
-        .section { padding: 25px; display: none; position: relative; z-index: 2; }
+        .section { padding: 20px; display: none; position: relative; z-index: 2; }
         .section.active { display: block; }
         
-        h2.section-heading { font-size: 21px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
-        p.section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+        h2.section-heading { font-size: 19px; font-weight: 800; margin-bottom: 6px; color: var(--text-main); }
+        p.section-desc { color: var(--text-muted); font-size: 13px; margin-bottom: 15px; line-height: 1.4; }
 
-        .form-group { margin-bottom: 18px; }
-        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-        input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; font-size: 14.5px; background: #f8fafc; outline: none; transition: all 0.3s; }
-        input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+        .form-group { margin-bottom: 14px; }
+        label { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
+        input { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 10px; font-size: 14px; background: #f8fafc; outline: none; transition: all 0.3s; }
+        input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
 
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.25); }
-        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
-        .btn-back { background: #64748b; margin-top: 10px; box-shadow: 0 4px 15px rgba(100, 116, 139, 0.25); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn-back { background: #64748b; margin-top: 8px; box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2); }
 
-        /* GRID 3 PILIHAN KECIL/RINGKAS DI LANDING PAGE */
-        .landing-grid-compact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .landing-card-sm { border: 2px solid var(--border); border-radius: 12px; padding: 14px 16px; text-align: left; cursor: pointer; transition: all 0.2s; background: #ffffff; display: flex; align-items: center; gap: 14px; }
-        .landing-card-sm:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08); border-color: var(--primary); background: #f8fafc; }
-        .landing-card-sm i { font-size: 20px; padding: 10px; border-radius: 10px; flex-shrink: 0; }
-        .landing-card-sm div h3 { font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
-        .landing-card-sm div p { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+        /* GRID 3 PILIHAN KECIL / RINGKAS DI LANDING PAGE */
+        .landing-grid-compact { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 15px; }
+        .landing-card-sm { border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 12px; text-align: left; cursor: pointer; transition: all 0.2s; background: #ffffff; display: flex; align-items: center; gap: 10px; }
+        .landing-card-sm:hover { transform: translateY(-2px); box-shadow: 0 6px 15px -4px rgba(0,0,0,0.06); border-color: var(--primary); background: #f8fafc; }
+        .landing-card-sm i { font-size: 16px; padding: 8px; border-radius: 8px; flex-shrink: 0; }
+        .landing-card-sm div h3 { font-size: 13.5px; font-weight: 700; color: var(--text-main); margin-bottom: 1px; }
+        .landing-card-sm div p { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
 
         .card-tentang i { color: #3b82f6; background: #eff6ff; }
         .card-visi i { color: #10b981; background: #d1fae5; }
         .card-tim i { color: #8b5cf6; background: #f3e8f6; }
 
-        /* DASHBOARD MENU GRID */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
-        .menu-card { border: 2px solid var(--border); border-radius: 14px; padding: 20px; text-align: left; cursor: pointer; transition: all 0.3s; background: #ffffff; }
-        .menu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px -8px rgba(0,0,0,0.1); border-color: var(--primary); }
-        .menu-card i { font-size: 26px; margin-bottom: 12px; padding: 12px; border-radius: 10px; display: inline-block; }
-        .menu-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
-        .menu-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+        /* DASHBOARD MENU GRID LEBIH KECIL & RINGKAS */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .menu-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 14px; text-align: left; cursor: pointer; transition: all 0.2s; background: #ffffff; display: flex; align-items: flex-start; gap: 12px; }
+        .menu-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08); border-color: var(--primary); background: #f8fafc; }
+        .menu-card i { font-size: 20px; padding: 10px; border-radius: 10px; flex-shrink: 0; }
+        .menu-card div h3 { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
+        .menu-card div p { font-size: 11.5px; color: var(--text-muted); line-height: 1.3; }
 
-        .card-ujian { border-left: 5px solid #3b82f6; }
+        .card-ujian { border-left: 4px solid #3b82f6; }
         .card-ujian i { color: #3b82f6; background: #eff6ff; }
-        .card-tka { border-left: 5px solid #111827; }
+        .card-tka { border-left: 4px solid #111827; }
         .card-tka i { color: #111827; background: #f3f4f6; }
-        .card-utbk { border-left: 5px solid #9333ea; }
+        .card-utbk { border-left: 4px solid #9333ea; }
         .card-utbk i { color: #9333ea; background: #f3e8ff; }
-        .card-game { border-left: 5px solid #f59e0b; }
+        .card-game { border-left: 4px solid #f59e0b; }
         .card-game i { color: #f59e0b; background: #fef3c7; }
 
-        .ad-container { text-align: center; margin-bottom: 20px; padding: 12px; background: #f8fafc; border: 2px dashed var(--border); border-radius: 12px; overflow: hidden; }
-        .ad-container p { font-size: 10.5px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .ad-container { text-align: center; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 10px; overflow: hidden; }
+        .ad-container p { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 
         /* FOOTER KECIL */
-        .app-footer-credit { text-align: center; padding: 15px; font-size: 12px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .footer-donate-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 5px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .app-footer-credit { text-align: center; padding: 12px; font-size: 11px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .footer-donate-btn { display: inline-flex; align-items: center; gap: 5px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 4px 10px; border-radius: 15px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
         .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 15px; }
-        .modal-card { background: #fff; max-width: 440px; width: 100%; border-radius: var(--radius); padding: 25px 20px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 12px; }
+        .modal-card { background: #fff; max-width: 400px; width: 100%; border-radius: var(--radius); padding: 20px; text-align: center; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }
     </style>
 </head>
 <body>
@@ -95,23 +95,23 @@
                 <i class="fa-solid fa-graduation-cap"></i>
                 <div>
                     <h1>SmartGen Academy Learning</h1>
-                    <p>Portal Resmi Latihan Ujian Semester Terintegrasi Nasional</p>
+                    <p>Portal Resmi Latihan Ujian Terintegrasi</p>
                 </div>
             </div>
             <!-- Tombol Donasi di Header Atas -->
-            <button class="btn" style="width: auto; padding: 8px 14px; font-size: 12px; background: #f59e0b;" onclick="openDonateModal()">Donasi</button>
+            <button class="btn" style="width: auto; padding: 6px 12px; font-size: 11.5px; background: #f59e0b;" onclick="openDonateModal()">Donasi</button>
         </div>
 
         <!-- LANDING PAGE UTAMA DENGAN 3 PILIHAN KECIL / RINGKAS -->
         <div id="section-landing" class="section active">
-            <div style="margin-bottom: 15px; border-bottom: 2px solid var(--border); padding-bottom: 12px;">
-                <h3 style="font-size: 13.5px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+            <div style="margin-bottom: 12px; border-bottom: 1.5px solid var(--border); padding-bottom: 10px;">
+                <h3 style="font-size: 12.5px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
                     <i class="fa-solid fa-circle-check"></i> Portal Akademik Terintegrasi
                 </h3>
-                <h2 class="section-heading" style="margin-bottom: 0;">Selamat Datang di SmartGen Academy Learning</h2>
+                <h2 class="section-heading" style="margin-bottom: 0; font-size: 17px;">Selamat Datang di SmartGen Academy</h2>
             </div>
 
-            <p class="section-desc">Platform pembelajaran digital interaktif, Simulasi Ujian Sekolah, Asesmen TKA, Tryout UTBK, dan game edukasi dalam satu pintu.</p>
+            <p class="section-desc">Platform pembelajaran digital interaktif, Simulasi Ujian, TKA, Tryout UTBK, dan game edukasi dalam satu pintu.</p>
             
             <!-- 3 Pilihan Utama Bentuk Ringkas (Kecil) -->
             <div class="landing-grid-compact">
@@ -122,14 +122,14 @@
                         <p>Profil & latar belakang platform.</p>
                     </div>
                 </div>
-                <div class="landing-card-sm card-visi" onclick="window.location.href='tentang.html'">
+                <div class="landing-card-sm card-visi" onclick="window.location.href='visi-misi.html'">
                     <i class="fa-solid fa-bullseye"></i>
                     <div>
                         <h3>Visi Misi & Tujuan</h3>
                         <p>Arah dan tujuan strategis web.</p>
                     </div>
                 </div>
-                <div class="landing-card-sm card-tim" onclick="window.location.href='tentang.html'">
+                <div class="landing-card-sm card-tim" onclick="window.location.href='tim-pengembang.html'">
                     <i class="fa-solid fa-users-gear"></i>
                     <div>
                         <h3>Tim Pengembang</h3>
@@ -138,7 +138,7 @@
                 </div>
             </div>
 
-            <div style="background: #f8fafc; border-left: 4px solid var(--primary); padding: 12px 16px; border-radius: 0 10px 10px 0; margin-bottom: 18px; font-size: 13px; line-height: 1.5;">
+            <div style="background: #f8fafc; border-left: 3.5px solid var(--primary); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 15px; font-size: 12.5px; line-height: 1.4;">
                 Siap memulai latihan? Silakan masuk ke portal utama di bawah ini.
             </div>
             
@@ -167,23 +167,31 @@
             <div class="dashboard-grid">
                 <div class="menu-card card-ujian" onclick="window.location.href='ujian-semester.html'">
                     <i class="fa-solid fa-file-lines"></i>
-                    <h3>Ujian Semester (Kelas 1-12)</h3>
-                    <p>Modul soal lengkap reguler IPA, IPS, & mata pelajaran wajib per jenjang.</p>
+                    <div>
+                        <h3>Ujian Semester</h3>
+                        <p>Modul soal lengkap reguler Kelas 1-12.</p>
+                    </div>
                 </div>
                 <div class="menu-card card-tka" onclick="window.location.href='tka.html'">
                     <i class="fa-solid fa-award"></i>
-                    <h3>Ujian TKA (Kelas 6, 9, 12)</h3>
-                    <p>Simulasi Tes Kemampuan Akademik berstandar resmi Kemendikdasmen.</p>
+                    <div>
+                        <h3>Ujian TKA</h3>
+                        <p>Simulasi Tes Kemampuan Akademik.</p>
+                    </div>
                 </div>
                 <div class="menu-card card-utbk" onclick="window.location.href='utbk.html'">
                     <i class="fa-solid fa-graduation-cap"></i>
-                    <h3>Tryout UTBK SNBT</h3>
-                    <p>Simulasi ujian masuk Perguruan Tinggi Negeri premium berbayar.</p>
+                    <div>
+                        <h3>Tryout UTBK SNBT</h3>
+                        <p>Simulasi ujian masuk PTN premium.</p>
+                    </div>
                 </div>
                 <div class="menu-card card-game" onclick="window.location.href='game-edukasi.html'">
                     <i class="fa-solid fa-gamepad"></i>
-                    <h3>Game Edukasi & Penalaran</h3>
-                    <p>Asah otak interaktif, teka-teki logika, dan deret angka rahasia.</p>
+                    <div>
+                        <h3>Game Edukasi</h3>
+                        <p>Asah otak interaktif & logika.</p>
+                    </div>
                 </div>
             </div>
 
@@ -209,22 +217,22 @@
         <button class="footer-donate-btn" onclick="openDonateModal()">
             <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
         </button>
-        <div>© 2026 SmartGen Academy Learning — Developed by Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
+        <div>© 2026 SmartGen Academy Learning — Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
     </div>
 
     <!-- MODAL DONASI -->
     <div id="donateModal" class="modal-overlay">
         <div class="modal-card">
-            <h3 style="margin-bottom: 6px; color: var(--primary); font-size: 18px; font-weight: 800;">Dukung Pengembangan Server</h3>
-            <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">Scan QRIS di bawah ini untuk donasi server atau aktivasi Tryout UTBK.</p>
+            <h3 style="margin-bottom: 4px; color: var(--primary); font-size: 16px; font-weight: 800;">Dukung Pengembangan Server</h3>
+            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.3;">Scan QRIS di bawah ini untuk donasi server atau aktivasi Tryout.</p>
             
-            <div style="background: #f8fafc; border: 2px dashed var(--border); padding: 12px; border-radius: 12px; margin-bottom: 14px; display: flex; flex-direction: column; align-items: center;">
-                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 260px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                <p style="font-size: 11.5px; font-weight: 700; color: var(--text-main); margin-top: 8px;">Merchant: CS SmartGen Academy Learning</p>
+            <div style="background: #f8fafc; border: 1.5px dashed var(--border); padding: 10px; border-radius: 10px; margin-bottom: 10px; display: flex; flex-direction: column; align-items: center;">
+                <img src="https://i.imgur.com/hkFdYS4.jpeg" alt="QRIS SmartGen Academy" style="width: 100%; max-width: 220px; height: auto; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <p style="font-size: 11px; font-weight: 700; color: var(--text-main); margin-top: 6px;">Merchant: CS SmartGen Academy Learning</p>
             </div>
 
             <!-- KODE IKLAN ADSTERRA BARU DI MODAL -->
-            <div style="text-align: center; margin-bottom: 14px; padding: 8px; background: #f8fafc; border: 1px dashed var(--border); border-radius: 10px; overflow: hidden;">
+            <div style="text-align: center; margin-bottom: 10px; padding: 6px; background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 8px; overflow: hidden;">
                 <script>
                   atOptions = {
                     'key' : '070d794b06c5e2b76e2ff7331f3aebe6',
@@ -237,10 +245,10 @@
                 <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
             </div>
 
-            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 8px; background: #0ea5e9; padding: 12px; font-size: 14px;">
+            <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 6px; background: #0ea5e9; padding: 10px; font-size: 13px;">
                 <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
             </a>
-            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 12px; font-size: 14px;" onclick="closeDonateModal()">Tutup</button>
+            <button class="btn" style="background: #e2e8f0; color: var(--text-main); box-shadow: none; padding: 10px; font-size: 13px;" onclick="closeDonateModal()">Tutup</button>
         </div>
     </div>
 
