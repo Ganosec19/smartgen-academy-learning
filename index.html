@@ -46,7 +46,6 @@
         .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
         .btn-back { background: #64748b; margin-top: 8px; box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2); }
 
-        /* GRID 3 PILIHAN KECIL / RINGKAS DI LANDING PAGE */
         .landing-grid-compact { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 15px; }
         .landing-card-sm { border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 12px; text-align: left; cursor: pointer; transition: all 0.2s; background: #ffffff; display: flex; align-items: center; gap: 10px; }
         .landing-card-sm:hover { transform: translateY(-2px); box-shadow: 0 6px 15px -4px rgba(0,0,0,0.06); border-color: var(--primary); background: #f8fafc; }
@@ -58,7 +57,6 @@
         .card-visi i { color: #10b981; background: #d1fae5; }
         .card-tim i { color: #8b5cf6; background: #f3e8f6; }
 
-        /* DASHBOARD MENU GRID LEBIH KECIL & RINGKAS */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 15px; }
         .menu-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 14px; text-align: left; cursor: pointer; transition: all 0.2s; background: #ffffff; display: flex; align-items: flex-start; gap: 12px; }
         .menu-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08); border-color: var(--primary); background: #f8fafc; }
@@ -75,10 +73,6 @@
         .card-game { border-left: 4px solid #f59e0b; }
         .card-game i { color: #f59e0b; background: #fef3c7; }
 
-        .ad-container { text-align: center; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 10px; overflow: hidden; }
-        .ad-container p { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-
-        /* FOOTER KECIL */
         .app-footer-credit { text-align: center; padding: 12px; font-size: 11px; color: rgba(255, 255, 255, 0.8); font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .footer-donate-btn { display: inline-flex; align-items: center; gap: 5px; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; color: #fef3c7; padding: 4px 10px; border-radius: 15px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
         .footer-donate-btn:hover { background: #f59e0b; color: #fff; }
@@ -98,11 +92,9 @@
                     <p>Portal Resmi Latihan Ujian Terintegrasi</p>
                 </div>
             </div>
-            <!-- Tombol Donasi di Header Atas -->
             <button class="btn" style="width: auto; padding: 6px 12px; font-size: 11.5px; background: #f59e0b;" onclick="openDonateModal()">Donasi</button>
         </div>
 
-        <!-- LANDING PAGE UTAMA DENGAN 3 PILIHAN KECIL / RINGKAS -->
         <div id="section-landing" class="section active">
             <div style="margin-bottom: 12px; border-bottom: 1.5px solid var(--border); padding-bottom: 10px;">
                 <h3 style="font-size: 12.5px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">
@@ -113,7 +105,6 @@
 
             <p class="section-desc">Platform pembelajaran digital interaktif, Simulasi Ujian, TKA, Tryout UTBK, dan game edukasi dalam satu pintu.</p>
             
-            <!-- 3 Pilihan Utama Bentuk Ringkas (Kecil) -->
             <div class="landing-grid-compact">
                 <div class="landing-card-sm card-tentang" onclick="window.location.href='tentang.html'">
                     <i class="fa-solid fa-circle-info"></i>
@@ -142,8 +133,7 @@
                 Siap memulai latihan? Silakan masuk ke portal utama di bawah ini.
             </div>
             
-            <!-- Tombol Masuk Portal (Memicu Script Adsterra Otomatis) -->
-            <button class="btn" onclick="goToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk ke Portal Utama</button>
+            <button class="btn" onclick="switchSection('section-login')"><i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk ke Portal Utama</button>
         </div>
 
         <div id="section-login" class="section">
@@ -195,25 +185,9 @@
                     </div>
                 </div>
             </div>
-
-            <!-- KODE IKLAN BANNER -->
-            <div class="ad-container">
-                <p>- Sponsor / Informasi Iklan -</p>
-                <script>
-                  atOptions = {
-                    'key' : '070d794b06c5e2b76e2ff7331f3aebe6',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                  };
-                </script>
-                <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
-            </div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="app-footer-credit">
         <button class="footer-donate-btn" onclick="openDonateModal()">
             <i class="fa-solid fa-hand-holding-dollar"></i> Donasi pada Server
@@ -221,7 +195,6 @@
         <div>© 2026 SmartGen Academy Learning — Ganosec19Team-PuskemSmartGenTeam-kemdik</div>
     </div>
 
-    <!-- MODAL DONASI -->
     <div id="donateModal" class="modal-overlay">
         <div class="modal-card">
             <h3 style="margin-bottom: 4px; color: var(--primary); font-size: 16px; font-weight: 800;">Dukung Pengembangan Server</h3>
@@ -232,20 +205,6 @@
                 <p style="font-size: 11px; font-weight: 700; color: var(--text-main); margin-top: 6px;">Merchant: CS SmartGen Academy Learning</p>
             </div>
 
-            <!-- KODE IKLAN BANNER DI MODAL -->
-            <div style="text-align: center; margin-bottom: 10px; padding: 6px; background: #f8fafc; border: 1.5px dashed var(--border); border-radius: 8px; overflow: hidden;">
-                <script>
-                  atOptions = {
-                    'key' : '070d794b06c5e2b76e2ff7331f3aebe6',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                  };
-                </script>
-                <script src="https://www.highrevenueformat.com/070d794b06c5e2b76e2ff7331f3aebe6/invoke.js"></script>
-            </div>
-
             <a href="https://wa.me/6285771103619?text=Halo%20CS%20SmartGen%20Academy%20Learning,%20saya%20sudah%20melakukan%20donasi/pembayaran%20server.%20[Ganosec19Team-PuskemSmartGenTeam-kemdik]" target="_blank" class="btn" style="text-decoration: none; margin-bottom: 6px; background: #0ea5e9; padding: 10px; font-size: 13px;">
                 <i class="fa-brands fa-whatsapp"></i> Konfirmasi via WhatsApp
             </a>
@@ -254,21 +213,6 @@
     </div>
 
     <script>
-        function goToLogin() { 
-            // Skrip Adsterra dipanggil otomatis saat tombol Masuk diklik
-            try {
-                var adScript = document.createElement('script');
-                adScript.type = 'text/javascript';
-                adScript.src = 'https://pl31379810.profitableratecpmnetwork.com/a0/91/20/a091208c0b0de40cc310bd572b907070.js'; 
-                document.head.appendChild(adScript);
-            } catch(e) {
-                console.log('Ad error:', e);
-            }
-
-            // Pindah ke section login siswa
-            switchSection('section-login'); 
-        }
-
         function handleLogin() {
             const name = document.getElementById('inputName').value.trim();
             const contact = document.getElementById('inputContact').value.trim();
@@ -278,10 +222,12 @@
             localStorage.setItem('smartgen_contact', contact);
             switchSection('section-dashboard');
         }
+
         function switchSection(id) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
+
         function openDonateModal() { document.getElementById('donateModal').style.display = 'flex'; }
         function closeDonateModal() { document.getElementById('donateModal').style.display = 'none'; }
     </script>
